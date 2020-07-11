@@ -1,11 +1,16 @@
 package base.game.units;
 
 import static base.game.units.GroundUnitType.AAA;
+import static base.game.units.GroundUnitType.AIR;
 import static base.game.units.GroundUnitType.IFV;
 import static base.game.units.GroundUnitType.MBT;
 import static base.game.units.GroundUnitType.SAM;
 
 public enum GroundUnit {
+
+  // AWACS AND TANKER ARE PARSED BY THE DCS SCRIPTS JUST LIKE SAMS
+  AWACS        (AIR, "M 818"),
+  TANKER       (AIR, "M 818"),
 
   // TANKS
   ABRAMS       (MBT, "M-1 Abrams"),
