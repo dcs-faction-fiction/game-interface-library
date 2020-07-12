@@ -1,5 +1,5 @@
 package base.game.units;
 
-public enum GroundUnitType {
+public enum UnitType {
   MBT, IFV, AAA, SAM, AIR
 }

@@ -1,12 +1,12 @@
 package base.game.units;
 
-import static base.game.units.GroundUnitType.AAA;
-import static base.game.units.GroundUnitType.AIR;
-import static base.game.units.GroundUnitType.IFV;
-import static base.game.units.GroundUnitType.MBT;
-import static base.game.units.GroundUnitType.SAM;
+import static base.game.units.UnitType.AAA;
+import static base.game.units.UnitType.AIR;
+import static base.game.units.UnitType.IFV;
+import static base.game.units.UnitType.MBT;
+import static base.game.units.UnitType.SAM;
 
-public enum GroundUnit {
+public enum Unit {
 
   // AWACS AND TANKER ARE PARSED BY THE DCS SCRIPTS JUST LIKE SAMS
   AWACS        (AIR, "M 818"),
@@ -32,10 +32,10 @@ public enum GroundUnit {
   SA_PATRIOT   (SAM, "M 818"),
   ;
 
-  private final GroundUnitType type;
+  private final UnitType type;
   private final String dcstype;
 
-  private GroundUnit(GroundUnitType type, String dcstype) {
+  private Unit(UnitType type, String dcstype) {
     this.type = type;
     this.dcstype = dcstype;
   }

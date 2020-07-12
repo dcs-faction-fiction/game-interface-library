@@ -1,6 +1,6 @@
 package base.game;
 
-import base.game.units.GroundUnit;
+import base.game.units.Unit;
 import java.util.UUID;
 import org.immutables.gson.Gson;
 import org.immutables.value.Value;
@@ -10,6 +10,6 @@ import org.immutables.value.Value;
 @Value.Style(jdkOnly = true)
 public interface FactionUnit {
   UUID id();
-  GroundUnit type();
+  Unit type();
   Location location();
 }
