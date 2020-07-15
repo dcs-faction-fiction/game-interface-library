@@ -7,7 +7,9 @@ import org.immutables.value.Value;
 @Value.Immutable
 @Gson.TypeAdapters
 @Value.Style(jdkOnly = true)
-public interface FactionUnitPosition {
+public interface FactionWaypoint {
   UUID id();
+  String name();
+  Integer number();
   Location location();
 }
