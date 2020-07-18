@@ -395,7 +395,7 @@ redUnits+
 "                            {\n" +
 buildParkedUnit(nextId++, k.dcsname(), base.warehouseId(),
   parking.get(0).intValue(),
-  parking.get(1).intValue(),
+  parking.get(1).toString(),
   parking.get(2),
   parking.get(3))+
 "                            }, -- end of ["+(luact)+"]\n"
