@@ -5,16 +5,18 @@ import static base.game.CampaignCoalition.BLUE;
 import static base.game.CampaignCoalition.RED;
 import base.game.CampaignMap;
 import base.game.FactionUnit;
-import base.game.Parkings;
 import static base.game.warehouse.WarehouseItemCategory.HELICOPTERS;
 import static base.game.warehouse.WarehouseItemCategory.PLANES;
 import base.game.warehouse.WarehouseItemCode;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
+import java.util.stream.Collectors;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toMap;
 
 public class MissionBuilder {
 
@@ -56,17 +58,15 @@ return
     var blueUnits = "";
     var redUnits = "";
 
-    for (var e: warehouses.entrySet()) {
-      switch(e.getKey().coalition()) {
-        default:
-        case BLUE:
-          blueUnits += addAirbaseAircrafts(e.getKey(), e.getValue());
-          break;
-        case RED:
-          redUnits += addAirbaseAircrafts(e.getKey(), e.getValue());
-          break;
-      }
-    }
+    var blueWarehouses = warehouses.entrySet().stream()
+      .filter(e -> e.getKey().coalition() == BLUE)
+      .collect(toMap(Entry::getKey, Entry::getValue));
+    var redWarehouses = warehouses.entrySet().stream()
+      .filter(e -> e.getKey().coalition() == RED)
+      .collect(toMap(Entry::getKey, Entry::getValue));
+
+    blueUnits += addAirbaseAircrafts(blueWarehouses);
+    redUnits += addAirbaseAircrafts(redWarehouses);
 
     blueUnits += addGroundUnits(blueUnitsGround);
     redUnits += addGroundUnits(redUnitsGround);
@@ -370,58 +370,51 @@ redUnits+
 ;
   }
 
-  public String addAirbaseAircrafts(Airbases base, Map<WarehouseItemCode, Integer> warehouse) {
-    int parkingCt = 0;
-    var parkings = Parkings.getParkings(base.map(), base.warehouseId());
+  public String addAirbaseAircrafts(Map<Airbases, Map<WarehouseItemCode, Integer>> fullWarehouse) {
     String builtPlanes = "";
     String builtHelos = "";
 
-    var planes = warehouse.entrySet().stream()
-      .filter(e -> e.getKey().category() == PLANES)
-      .collect(toList());
-    var helos = warehouse.entrySet().stream()
-      .filter(e ->  e.getKey().category() == HELICOPTERS)
-      .collect(toList());
+    for (var we: fullWarehouse.entrySet()) {
+      var airbase = we.getKey();
+      var warehouse = we.getValue();
 
-    int luact = 1;
-    for (int i = 0; i < planes.size(); i++) {
-      var e = planes.get(i);
-      var k = e.getKey();
-      var v = e.getValue();
-      for (int ct = 0; ct < v; ct++) {
-        var parking = parkings.get(parkingCt++);
-        builtPlanes +=
-"                            ["+(luact)+"] = \n" +
-"                            {\n" +
-buildParkedUnit(nextId++, k.dcsname(), base.warehouseId(),
-  parking.get(0).intValue(),
-  parking.get(1).toString(),
-  parking.get(2),
-  parking.get(3))+
-"                            }, -- end of ["+(luact)+"]\n"
-;
-        luact++;
+      var planes = warehouse.entrySet().stream()
+        .filter(e -> e.getKey().category() == PLANES)
+        .collect(toList());
+      var helos = warehouse.entrySet().stream()
+        .filter(e ->  e.getKey().category() == HELICOPTERS)
+        .collect(toList());
+
+      int luact = 1;
+      for (int i = 0; i < planes.size(); i++) {
+        var e = planes.get(i);
+        var k = e.getKey();
+        var v = e.getValue();
+        for (int ct = 0; ct < v; ct++) {
+          builtPlanes +=
+  "                            ["+(luact)+"] = \n" +
+  "                            {\n" +
+  buildParkedUnit(nextId++, k.dcsname(), airbase.warehouseId())+
+  "                            }, -- end of ["+(luact)+"]\n"
+  ;
+          luact++;
+        }
       }
-    }
 
-    luact = 1;
-    for (int i = 0; i < helos.size(); i++) {
-      var e = helos.get(i);
-      var k = e.getKey();
-      var v = e.getValue();
-      for (int ct = 0; ct < v; ct++) {
-        var parking = parkings.get(parkingCt++);
-        builtHelos +=
-"                            ["+(luact)+"] = \n" +
-"                            {\n" +
-buildParkedUnit(nextId++, k.dcsname(), base.warehouseId(),
-  parking.get(0).intValue(),
-  parking.get(1).toString(),
-  parking.get(2),
-  parking.get(3))+
-"                            }, -- end of ["+(luact)+"]\n"
-;
-        luact++;
+      luact = 1;
+      for (int i = 0; i < helos.size(); i++) {
+        var e = helos.get(i);
+        var k = e.getKey();
+        var v = e.getValue();
+        for (int ct = 0; ct < v; ct++) {
+          builtHelos +=
+  "                            ["+(luact)+"] = \n" +
+  "                            {\n" +
+  buildParkedUnit(nextId++, k.dcsname(), airbase.warehouseId())+
+  "                            }, -- end of ["+(luact)+"]\n"
+  ;
+          luact++;
+        }
       }
     }
 
@@ -443,7 +436,7 @@ builtPlanes+
 ;
   }
 
-  public String buildParkedUnit(int id, String type, int airdromeId, int parking, String parkingId, double x, double y) {
+  public String buildParkedUnit(int id, String type, int airdromeId) {
     var name = "ParkedUnit "+id;
     dict.add(name);
     return
@@ -478,8 +471,6 @@ builtPlanes+
 "                                            [\"type\"] = \"TakeOffParking\",\n" +
 "                                            [\"ETA\"] = 0,\n" +
 "                                            [\"ETA_locked\"] = true,\n" +
-"                                            [\"y\"] = "+x+",\n" +
-"                                            [\"x\"] = "+y+",\n" +
 "                                            [\"name\"] = \"0\",\n" +
 "                                            [\"formation_template\"] = \"\",\n" +
 "                                            [\"airdromeId\"] = "+airdromeId+",\n" +
@@ -497,7 +488,6 @@ builtPlanes+
 "                                        [\"alt_type\"] = \"BARO\",\n" +
 "                                        [\"livery_id\"] = \"36STV Camouflage\",\n" +
 "                                        [\"skill\"] = \"Client\",\n" +
-"                                        [\"parking\"] = \""+parking+"\",\n" +
 "                                        [\"speed\"] = 138.88888888889,\n" +
 "                                        [\"AddPropAircraft\"] = \n" +
 "                                        {\n" +
@@ -508,8 +498,6 @@ builtPlanes+
 "                                        }, -- end of [\"Radio\"]\n" +
 "                                        [\"unitId\"] = "+id+",\n" +
 "                                        [\"psi\"] = 0,\n" +
-"                                        [\"parking_id\"] = \""+parkingId+"\",\n" +
-"                                        [\"x\"] = "+x+",\n" +
 "                                        [\"name\"] = \""+name+"\",\n" +
 "                                        [\"payload\"] = \n" +
 "                                        {\n" +
@@ -522,7 +510,6 @@ builtPlanes+
 "                                            [\"chaff\"] = 0,\n" +
 "                                            [\"gun\"] = 0,\n" +
 "                                        }, -- end of [\"payload\"]\n" +
-"                                        [\"y\"] = "+y+",\n" +
 "                                        [\"heading\"] = 0,\n" +
 "                                        [\"callsign\"] = \n" +
 "                                        {\n" +
@@ -534,8 +521,6 @@ builtPlanes+
 "                                        [\"onboard_num\"] = \"010\",\n" +
 "                                    }, -- end of [1]\n" +
 "                                }, -- end of [\"units\"]\n" +
-"                                [\"y\"] = "+y+",\n" +
-"                                [\"x\"] = "+x+",\n" +
 "                                [\"name\"] = \""+name+"\",\n" +
 "                                [\"communication\"] = true,\n" +
 "                                [\"start_time\"] = 0,\n" +
