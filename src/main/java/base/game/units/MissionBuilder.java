@@ -416,7 +416,7 @@ buildParkedUnit(nextId++, k.dcsname(), base.warehouseId(),
 "                            {\n" +
 buildParkedUnit(nextId++, k.dcsname(), base.warehouseId(),
   parking.get(0).intValue(),
-  parking.get(1).intValue(),
+  parking.get(1).toString(),
   parking.get(2),
   parking.get(3))+
 "                            }, -- end of ["+(luact)+"]\n"
@@ -443,7 +443,7 @@ builtPlanes+
 ;
   }
 
-  public String buildParkedUnit(int id, String type, int airdromeId, int parking, int parkingId, double x, double y) {
+  public String buildParkedUnit(int id, String type, int airdromeId, int parking, String parkingId, double x, double y) {
     var name = "ParkedUnit "+id;
     dict.add(name);
     return
