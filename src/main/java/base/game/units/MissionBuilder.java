@@ -551,7 +551,7 @@ builtUnits+
   }
 
   public String buildGroundUnit(int id, FactionUnit unit) {
-    var name = "[UUID:"+unit.id()+"] "
+    var name = "[UUID:"+unit.id().get()+"] "
              + "[grouptype:"+unit.type().name()+"]"
              + "[lat:"+unit.location().latitude()+"] "
              + "[lon:"+unit.location().longitude()+"]";
