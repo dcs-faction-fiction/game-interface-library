@@ -5,6 +5,7 @@ import static base.game.CampaignCoalition.BLUE;
 import static base.game.CampaignCoalition.RED;
 import base.game.CampaignMap;
 import base.game.FactionUnit;
+import base.game.Parkings;
 import static base.game.warehouse.WarehouseItemCategory.HELICOPTERS;
 import static base.game.warehouse.WarehouseItemCategory.PLANES;
 import base.game.warehouse.WarehouseItemCode;
@@ -374,9 +375,14 @@ redUnits+
     String builtPlanes = "";
     String builtHelos = "";
 
+    int luactplanes = 1;
+    int luacthelos = 1;
     for (var we: fullWarehouse.entrySet()) {
       var airbase = we.getKey();
       var warehouse = we.getValue();
+
+      int parkingCt = 0;
+      var parkings = Parkings.getParkings(airbase.map(), airbase.warehouseId());
 
       var planes = warehouse.entrySet().stream()
         .filter(e -> e.getKey().category() == PLANES)
@@ -385,35 +391,35 @@ redUnits+
         .filter(e ->  e.getKey().category() == HELICOPTERS)
         .collect(toList());
 
-      int luact = 1;
       for (int i = 0; i < planes.size(); i++) {
+        var parking = parkings.get(parkingCt++);
         var e = planes.get(i);
         var k = e.getKey();
         var v = e.getValue();
         for (int ct = 0; ct < v; ct++) {
           builtPlanes +=
-  "                            ["+(luact)+"] = \n" +
+  "                            ["+(luactplanes)+"] = \n" +
   "                            {\n" +
-  buildParkedUnit(nextId++, k.dcsname(), airbase.warehouseId())+
-  "                            }, -- end of ["+(luact)+"]\n"
+  buildParkedUnit(nextId++, k.dcsname(), airbase.warehouseId(), parking)+
+  "                            }, -- end of ["+(luactplanes)+"]\n"
   ;
-          luact++;
+          luactplanes++;
         }
       }
 
-      luact = 1;
       for (int i = 0; i < helos.size(); i++) {
+        var parking = parkings.get(parkingCt++);
         var e = helos.get(i);
         var k = e.getKey();
         var v = e.getValue();
         for (int ct = 0; ct < v; ct++) {
           builtHelos +=
-  "                            ["+(luact)+"] = \n" +
+  "                            ["+(luacthelos)+"] = \n" +
   "                            {\n" +
-  buildParkedUnit(nextId++, k.dcsname(), airbase.warehouseId())+
-  "                            }, -- end of ["+(luact)+"]\n"
+  buildParkedUnit(nextId++, k.dcsname(), airbase.warehouseId(), parking)+
+  "                            }, -- end of ["+(luacthelos)+"]\n"
   ;
-          luact++;
+          luacthelos++;
         }
       }
     }
@@ -436,8 +442,12 @@ builtPlanes+
 ;
   }
 
-  public String buildParkedUnit(int id, String type, int airdromeId) {
+  public String buildParkedUnit(int id, String type, int airdromeId, List<String> parking) {
     var name = "ParkedUnit "+id;
+    var parkingNumber = parking.get(0);
+    var parkingId = parking.get(1);
+    var x = parking.get(2);
+    var y = parking.get(3);
     dict.add(name);
     return
 "                                [\"modulation\"] = 0,\n" +
@@ -471,6 +481,8 @@ builtPlanes+
 "                                            [\"type\"] = \"TakeOffParking\",\n" +
 "                                            [\"ETA\"] = 0,\n" +
 "                                            [\"ETA_locked\"] = true,\n" +
+"                                            [\"y\"] = "+x+",\n" +
+"                                            [\"x\"] = "+y+",\n" +
 "                                            [\"name\"] = \"0\",\n" +
 "                                            [\"formation_template\"] = \"\",\n" +
 "                                            [\"airdromeId\"] = "+airdromeId+",\n" +
@@ -488,6 +500,7 @@ builtPlanes+
 "                                        [\"alt_type\"] = \"BARO\",\n" +
 "                                        [\"livery_id\"] = \"36STV Camouflage\",\n" +
 "                                        [\"skill\"] = \"Client\",\n" +
+"                                        [\"parking\"] = "+parkingNumber+",\n" +
 "                                        [\"speed\"] = 138.88888888889,\n" +
 "                                        [\"AddPropAircraft\"] = \n" +
 "                                        {\n" +
@@ -498,6 +511,9 @@ builtPlanes+
 "                                        }, -- end of [\"Radio\"]\n" +
 "                                        [\"unitId\"] = "+id+",\n" +
 "                                        [\"psi\"] = 0,\n" +
+"                                        [\"parking_id\"] = \""+parkingId+"\",\n" +
+"                                        [\"x\"] = "+x+",\n" +
+"                                        [\"y\"] = "+y+",\n" +
 "                                        [\"name\"] = \""+name+"\",\n" +
 "                                        [\"payload\"] = \n" +
 "                                        {\n" +
@@ -521,6 +537,8 @@ builtPlanes+
 "                                        [\"onboard_num\"] = \"010\",\n" +
 "                                    }, -- end of [1]\n" +
 "                                }, -- end of [\"units\"]\n" +
+"                                [\"x\"] = "+x+",\n" +
+"                                [\"y\"] = "+y+",\n" +
 "                                [\"name\"] = \""+name+"\",\n" +
 "                                [\"communication\"] = true,\n" +
 "                                [\"start_time\"] = 0,\n" +
