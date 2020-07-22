@@ -6,6 +6,7 @@ import base.game.warehouse.WarehouseBuilder;
 import base.game.warehouse.WarehouseItemCode;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.math.BigDecimal;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +21,7 @@ public class FullMissionBuilder {
 
   public void build(
     CampaignMap map,
-    Map<Airbases, Map<WarehouseItemCode, Integer>> warehousesMap,
+    Map<Airbases, Map<WarehouseItemCode, BigDecimal>> warehousesMap,
     List<FactionUnit> blueUnits,
     List<FactionUnit> redUnits,
     OutputStream out) {

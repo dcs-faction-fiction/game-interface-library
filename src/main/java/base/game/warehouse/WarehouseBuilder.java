@@ -8,6 +8,8 @@ import static base.game.warehouse.WarehouseItemCode.AVIATION_GASOLINE_TONS;
 import static base.game.warehouse.WarehouseItemCode.DIESEL_TONS;
 import static base.game.warehouse.WarehouseItemCode.JET_FUEL_TONS;
 import static base.game.warehouse.WarehouseItemCode.MW50_TONS;
+import java.math.BigDecimal;
+import static java.math.BigDecimal.ZERO;
 import java.util.Map;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
@@ -18,7 +20,7 @@ public final class WarehouseBuilder {
   }
 
   public static String build(
-    Map<Airbases, Map<WarehouseItemCode, Integer>> warehouses) {
+    Map<Airbases, Map<WarehouseItemCode, BigDecimal>> warehouses) {
 
     var builtAirbases = warehouses.keySet().stream()
       .map(base -> buildAirbase(base, warehouses.get(base)))
@@ -37,7 +39,7 @@ public final class WarehouseBuilder {
 "} -- end of warehouses\n";
   }
 
-  private static String buildAirbase(Airbases airbase, Map<WarehouseItemCode, Integer> quantities) {
+  private static String buildAirbase(Airbases airbase, Map<WarehouseItemCode, BigDecimal> quantities) {
     var helicopters = quantities.entrySet().stream()
       .filter(e -> e.getKey().category() == HELICOPTERS)
       .map(e -> {
@@ -106,17 +108,17 @@ public final class WarehouseBuilder {
 "        {\n" +
 "            [\"gasoline\"] = \n" +
 "            {\n" +
-"                [\"InitFuel\"] = "+quantities.getOrDefault(AVIATION_GASOLINE_TONS, 0)+",\n" +
+"                [\"InitFuel\"] = "+quantities.getOrDefault(AVIATION_GASOLINE_TONS, ZERO)+",\n" +
 "            }, -- end of [\"gasoline\"]\n" +
 "            [\"unlimitedMunitions\"] = false,\n" +
 "            [\"methanol_mixture\"] = \n" +
 "            {\n" +
-"                [\"InitFuel\"] = "+quantities.getOrDefault(MW50_TONS, 0)+",\n" +
+"                [\"InitFuel\"] = "+quantities.getOrDefault(MW50_TONS, ZERO)+",\n" +
 "            }, -- end of [\"methanol_mixture\"]\n" +
 "            [\"OperatingLevel_Air\"] = 10,\n" +
 "            [\"diesel\"] = \n" +
 "            {\n" +
-"                [\"InitFuel\"] = "+quantities.getOrDefault(DIESEL_TONS, 0)+",\n" +
+"                [\"InitFuel\"] = "+quantities.getOrDefault(DIESEL_TONS, ZERO)+",\n" +
 "            }, -- end of [\"diesel\"]\n" +
 "            [\"speed\"] = 16.666666,\n" +
 "            [\"size\"] = 100,\n" +
@@ -127,7 +129,7 @@ public final class WarehouseBuilder {
 "            [\"coalition\"] = \""+airbase.coalition()+"\",\n" +
 "            [\"jet_fuel\"] = \n" +
 "            {\n" +
-"                [\"InitFuel\"] = "+quantities.getOrDefault(JET_FUEL_TONS, 0)+",\n" +
+"                [\"InitFuel\"] = "+quantities.getOrDefault(JET_FUEL_TONS, ZERO)+",\n" +
 "            }, -- end of [\"jet_fuel\"]\n" +
 "            [\"OperatingLevel_Eqp\"] = 10,\n" +
 "            [\"unlimitedFuel\"] = false,\n" +

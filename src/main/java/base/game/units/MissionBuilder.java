@@ -9,6 +9,7 @@ import base.game.Parkings;
 import static base.game.warehouse.WarehouseItemCategory.HELICOPTERS;
 import static base.game.warehouse.WarehouseItemCategory.PLANES;
 import base.game.warehouse.WarehouseItemCode;
+import java.math.BigDecimal;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -43,7 +44,7 @@ return
   }
 
   public String mission(CampaignMap map,
-    Map<Airbases, Map<WarehouseItemCode, Integer>> warehouses,
+    Map<Airbases, Map<WarehouseItemCode, BigDecimal>> warehouses,
     List<FactionUnit> blueUnitsGround,
     List<FactionUnit> redUnitsGround) {
 
@@ -371,7 +372,7 @@ redUnits+
 ;
   }
 
-  public String addAirbaseAircrafts(Map<Airbases, Map<WarehouseItemCode, Integer>> fullWarehouse) {
+  public String addAirbaseAircrafts(Map<Airbases, Map<WarehouseItemCode, BigDecimal>> fullWarehouse) {
     String builtPlanes = "";
     String builtHelos = "";
 
@@ -392,11 +393,11 @@ redUnits+
         .collect(toList());
 
       for (int i = 0; i < planes.size(); i++) {
-        var parking = parkings.get(parkingCt++);
         var e = planes.get(i);
         var k = e.getKey();
-        var v = e.getValue();
+        var v = Integer.valueOf(e.getValue().toBigInteger().toString());
         for (int ct = 0; ct < v; ct++) {
+          var parking = parkings.get(parkingCt++);
           builtPlanes +=
   "                            ["+(luactplanes)+"] = \n" +
   "                            {\n" +
@@ -408,11 +409,11 @@ redUnits+
       }
 
       for (int i = 0; i < helos.size(); i++) {
-        var parking = parkings.get(parkingCt++);
         var e = helos.get(i);
         var k = e.getKey();
-        var v = e.getValue();
+        var v = Integer.valueOf(e.getValue().toBigInteger().toString());
         for (int ct = 0; ct < v; ct++) {
+          var parking = parkings.get(parkingCt++);
           builtHelos +=
   "                            ["+(luacthelos)+"] = \n" +
   "                            {\n" +
