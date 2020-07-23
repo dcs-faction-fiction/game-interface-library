@@ -21,7 +21,7 @@ public class FullMissionBuilder {
 
   public void build(
     CampaignMap map,
-    Map<Airbases, Map<WarehouseItemCode, BigDecimal>> warehousesMap,
+    Map<CampaignCoalition, Map<Airbases, Map<WarehouseItemCode, BigDecimal>>> warehousesMap,
     List<FactionUnit> blueUnits,
     List<FactionUnit> redUnits,
     OutputStream out) {
