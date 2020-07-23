@@ -1,6 +1,7 @@
 package base.game.units;
 
 import base.game.Airbases;
+import base.game.CampaignCoalition;
 import static base.game.CampaignCoalition.BLUE;
 import static base.game.CampaignCoalition.RED;
 import base.game.CampaignMap;
@@ -10,15 +11,13 @@ import static base.game.warehouse.WarehouseItemCategory.HELICOPTERS;
 import static base.game.warehouse.WarehouseItemCategory.PLANES;
 import base.game.warehouse.WarehouseItemCode;
 import java.math.BigDecimal;
+import java.util.EnumMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
-import java.util.stream.Collectors;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
-import static java.util.stream.Collectors.toMap;
 
 public class MissionBuilder {
 
@@ -44,7 +43,7 @@ return
   }
 
   public String mission(CampaignMap map,
-    Map<Airbases, Map<WarehouseItemCode, BigDecimal>> warehouses,
+    Map<CampaignCoalition, Map<Airbases, Map<WarehouseItemCode, BigDecimal>>> warehouses,
     List<FactionUnit> blueUnitsGround,
     List<FactionUnit> redUnitsGround) {
 
@@ -60,12 +59,8 @@ return
     var blueUnits = "";
     var redUnits = "";
 
-    var blueWarehouses = warehouses.entrySet().stream()
-      .filter(e -> e.getKey().coalition() == BLUE)
-      .collect(toMap(Entry::getKey, Entry::getValue));
-    var redWarehouses = warehouses.entrySet().stream()
-      .filter(e -> e.getKey().coalition() == RED)
-      .collect(toMap(Entry::getKey, Entry::getValue));
+    var blueWarehouses = warehouses.computeIfAbsent(BLUE, k -> new EnumMap<>(Airbases.class));
+    var redWarehouses = warehouses.computeIfAbsent(RED, k -> new EnumMap<>(Airbases.class));
 
     blueUnits += addAirbaseAircrafts(blueWarehouses);
     redUnits += addAirbaseAircrafts(redWarehouses);

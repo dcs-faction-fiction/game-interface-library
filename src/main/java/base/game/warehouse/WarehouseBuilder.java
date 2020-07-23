@@ -1,6 +1,7 @@
 package base.game.warehouse;
 
 import base.game.Airbases;
+import base.game.CampaignCoalition;
 import static base.game.warehouse.WarehouseItemCategory.AMMO;
 import static base.game.warehouse.WarehouseItemCategory.HELICOPTERS;
 import static base.game.warehouse.WarehouseItemCategory.PLANES;
@@ -20,18 +21,19 @@ public final class WarehouseBuilder {
   }
 
   public static String build(
-    Map<Airbases, Map<WarehouseItemCode, BigDecimal>> warehouses) {
+    Map<CampaignCoalition, Map<Airbases, Map<WarehouseItemCode, BigDecimal>>> warehouses) {
 
-    var builtAirbases = warehouses.keySet().stream()
-      .map(base -> buildAirbase(base, warehouses.get(base)))
-      .collect(joining(""));
+    var builtAirbases = new StringBuilder();
+    for (var e1: warehouses.entrySet())
+      for (var e2: e1.getValue().entrySet())
+        builtAirbases.append(buildAirbase(e2.getKey(), e1.getKey(), e2.getValue()));
 
     return
 "warehouses = \n"+
 "{\n" +
 "    [\"airports\"] = \n" +
 "    {\n" +
-         builtAirbases +
+         builtAirbases.toString() +
 "    }, -- end of [\"airports\"]\n" +
 "    [\"warehouses\"] = \n" +
 "    {\n" +
@@ -39,7 +41,7 @@ public final class WarehouseBuilder {
 "} -- end of warehouses\n";
   }
 
-  private static String buildAirbase(Airbases airbase, Map<WarehouseItemCode, BigDecimal> quantities) {
+  private static String buildAirbase(Airbases airbase, CampaignCoalition coalition, Map<WarehouseItemCode, BigDecimal> quantities) {
     var helicopters = quantities.entrySet().stream()
       .filter(e -> e.getKey().category() == HELICOPTERS)
       .map(e -> {
@@ -126,7 +128,7 @@ public final class WarehouseBuilder {
 "            [\"suppliers\"] = \n" +
 "            {\n" +
 "            }, -- end of [\"suppliers\"]\n" +
-"            [\"coalition\"] = \""+airbase.coalition()+"\",\n" +
+"            [\"coalition\"] = \""+coalition+"\",\n" +
 "            [\"jet_fuel\"] = \n" +
 "            {\n" +
 "                [\"InitFuel\"] = "+quantities.getOrDefault(JET_FUEL_TONS, ZERO)+",\n" +

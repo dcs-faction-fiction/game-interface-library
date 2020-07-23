@@ -13,8 +13,8 @@ import org.immutables.value.Value;
 public interface FactionAirbase {
   String name();
   Airbases code();
+  CampaignCoalition coalition();
   default Location location() {return code().location(); }
-  default CampaignCoalition coalition() {return code().coalition(); }
   default CampaignMap map() {return code().map(); }
   List<FactionWaypoint> waypoints();
   Map<WarehouseItemCode, Integer> warehouse();
