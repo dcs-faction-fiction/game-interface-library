@@ -43,6 +43,7 @@ return
   }
 
   public String mission(CampaignMap map,
+    MissionConfiguration configuration,
     Map<CampaignCoalition, Map<Airbases, Map<WarehouseItemCode, BigDecimal>>> warehouses,
     List<FactionUnit> blueUnitsGround,
     List<FactionUnit> redUnitsGround) {
@@ -53,7 +54,7 @@ return
     // - add ground routes
 
     // 2h mission, alert 5 minutes before end.
-    var missionDurationSeconds = 3600*2;
+    var missionDurationSeconds = configuration.missionDurationSeconds();
     var missionEndWarningSeconds = 300;
 
     var blueUnits = "";
@@ -68,17 +69,23 @@ return
     blueUnits += addGroundUnits(blueUnitsGround);
     redUnits += addGroundUnits(redUnitsGround);
 
+    var clock = configuration.time().seconds()
+      + configuration.time().minutes() * 60
+      + configuration.time().hours() * 3600;
+
+    var weather = makeWeather(configuration.weather());
+
     return
 "mission = \n" +
 "{\n" +
-"    [\"requiredModules\"] = \n" +
-"    {\n" +
-"    }, -- end of [\"requiredModules\"]\n" +
+"    [\"requiredModules\"] = {},\n" +
+"    [\"theatre\"] = \""+map.dcsname()+"\",\n" +
+"    [\"start_time\"] = "+clock+",\n" +
 "    [\"date\"] = \n" +
 "    {\n" +
-"        [\"Day\"] = 21,\n" +
-"        [\"Year\"] = 2016,\n" +
-"        [\"Month\"] = 6,\n" +
+"        [\"Day\"] = "+configuration.time().day()+",\n" +
+"        [\"Month\"] = "+configuration.time().month()+",\n" +
+"        [\"Year\"] = "+configuration.time().year()+",\n" +
 "    }, -- end of [\"date\"]\n" +
 "    [\"trig\"] = \n" +
 "    {\n" +
@@ -163,14 +170,14 @@ return
 "            [\"artillery_commander\"] = \n" +
 "            {\n" +
 "                [\"neutrals\"] = 0,\n" +
-"                [\"blue\"] = 8,\n" +
-"                [\"red\"] = 8,\n" +
+"                [\"blue\"] = "+configuration.tacticalCommanderSlots()+",\n" +
+"                [\"red\"] = "+configuration.tacticalCommanderSlots()+",\n" +
 "            }, -- end of [\"artillery_commander\"]\n" +
 "            [\"instructor\"] = \n" +
 "            {\n" +
 "                [\"neutrals\"] = 0,\n" +
-"                [\"blue\"] = 1,\n" +
-"                [\"red\"] = 1,\n" +
+"                [\"blue\"] = "+ (configuration.gameMasterEnabled() ? 1 : 0) +",\n" +
+"                [\"red\"] = "+ (configuration.gameMasterEnabled() ? 1 : 0) +",\n" +
 "            }, -- end of [\"instructor\"]\n" +
 "            [\"observer\"] = \n" +
 "            {\n" +
@@ -181,8 +188,8 @@ return
 "            [\"forward_observer\"] = \n" +
 "            {\n" +
 "                [\"neutrals\"] = 0,\n" +
-"                [\"blue\"] = 8,\n" +
-"                [\"red\"] = 8,\n" +
+"                [\"blue\"] = 0,\n" +
+"                [\"red\"] = 0,\n" +
 "            }, -- end of [\"forward_observer\"]\n" +
 "        }, -- end of [\"roles\"]\n" +
 "    }, -- end of [\"groundControl\"]\n" +
@@ -190,6 +197,121 @@ return
 "    {\n" +
 "    }, -- end of [\"goals\"]\n" +
 "    [\"weather\"] = \n" +
+weather +
+"    [\"triggers\"] = \n" +
+"    {\n" +
+"        [\"zones\"] = \n" +
+"        {\n" +
+"        }, -- end of [\"zones\"]\n" +
+"    }, -- end of [\"triggers\"]\n" +
+"    [\"map\"] = \n" +
+"    {\n" +
+"        [\"centerY\"] = 638429.14857143,\n" +
+"        [\"zoom\"] = 131220,\n" +
+"        [\"centerX\"] = -298572.99714286,\n" +
+"    }, -- end of [\"map\"]\n" +
+"    [\"coalitions\"] = \n" +
+"    {\n" +
+"        [\"neutrals\"] = \n" +
+"        {\n" +
+"        }, -- end of [\"neutrals\"]\n" +
+"        [\"blue\"] = \n" +
+"        {\n" +
+"            [1] = 2,\n" +
+"        }, -- end of [\"blue\"]\n" +
+"        [\"red\"] = \n" +
+"        {\n" +
+"            [1] = 7,\n" +
+"        }, -- end of [\"red\"]\n" +
+"    }, -- end of [\"coalitions\"]\n" +
+"    [\"descriptionText\"] = \"\",\n" +
+"    [\"pictureFileNameR\"] = {},\n" +
+"    [\"descriptionNeutralsTask\"] = \"\",\n" +
+"    [\"descriptionBlueTask\"] = \"\",\n" +
+"    [\"descriptionRedTask\"] = \"\",\n" +
+"    [\"pictureFileNameB\"] = {},\n" +
+"    [\"coalition\"] = \n" +
+"    {\n" +
+"        [\"blue\"] = \n" +
+"        {\n" +
+"            [\"bullseye\"] = \n" +
+"            {\n" +
+"                [\"y\"] = 617414,\n" +
+"                [\"x\"] = -291014,\n" +
+"            }, -- end of [\"bullseye\"]\n" +
+"            [\"nav_points\"] = {},\n" +
+"            [\"name\"] = \"blue\",\n" +
+"            [\"country\"] = \n" +
+"            {\n" +
+"                [1] = \n" +
+"                {\n" +
+"                    [\"id\"] = 2,\n" +
+"                    [\"name\"] = \"USA\",\n" +
+blueUnits+
+"                }, -- end of [8]\n" +
+"            }, -- end of [\"country\"]\n" +
+"        }, -- end of [\"blue\"]\n" +
+"        [\"red\"] = \n" +
+"        {\n" +
+"            [\"bullseye\"] = \n" +
+"            {\n" +
+"                [\"y\"] = 371700,\n" +
+"                [\"x\"] = 11557,\n" +
+"            }, -- end of [\"bullseye\"]\n" +
+"            [\"nav_points\"] = {},\n" +
+"            [\"name\"] = \"red\",\n" +
+"            [\"country\"] = \n" +
+"            {\n" +
+"                [1] = \n" +
+"                {\n" +
+"                    [\"id\"] = 7,\n" +
+"                    [\"name\"] = \"USAF Aggressors\",\n" +
+redUnits+
+"                }, -- end of [2]\n" +
+"            }, -- end of [\"country\"]\n" +
+"        }, -- end of [\"red\"]\n" +
+"    }, -- end of [\"coalition\"]\n" +
+"    [\"sortie\"] = \"\",\n" +
+"    [\"version\"] = 16,\n" +
+"    [\"trigrules\"] = \n" +
+"    {\n" +
+"        [1] = \n" +
+"        {\n" +
+"            [\"rules\"] = \n" +
+"            {\n" +
+"                [1] = \n" +
+"                {\n" +
+"                    [\"seconds\"] = "+missionDurationSeconds+",\n" +
+"                    [\"predicate\"] = \"c_time_after\",\n" +
+"                    [\"zone\"] = \"\",\n" +
+"                }, -- end of [1]\n" +
+"            }, -- end of [\"rules\"]\n" +
+"            [\"comment\"] = \"END\",\n" +
+"            [\"eventlist\"] = \"\",\n" +
+"            [\"actions\"] = \n" +
+"            {\n" +
+"                [1] = \n" +
+"                {\n" +
+"                    [\"text\"] = \"\",\n" +
+"                    [\"start_delay\"] = "+missionEndWarningSeconds+",\n" +
+"                    [\"zone\"] = \"\",\n" +
+"                    [\"predicate\"] = \"a_end_mission\",\n" +
+"                    [\"winner\"] = \"\",\n" +
+"                    [\"meters\"] = 1000,\n" +
+"                }, -- end of [1]\n" +
+"            }, -- end of [\"actions\"]\n" +
+"            [\"predicate\"] = \"triggerOnce\",\n" +
+"        }, -- end of [1]\n" +
+"    }, -- end of [\"trigrules\"]\n" +
+"    [\"currentKey\"] = 54,\n" +
+"    [\"forcedOptions\"] = {},\n" +
+"    [\"failures\"] = {},\n" +
+"} -- end of mission\n"
+;
+  }
+
+  public String makeWeather(MissionWeather weather) {
+return
 "    {\n" +
 "        [\"atmosphere_type\"] = 0,\n" +
 "        [\"groundTurbulence\"] = 0,\n" +
@@ -240,131 +362,7 @@ return
 "            [\"base\"] = 300,\n" +
 "            [\"iprecptns\"] = 0,\n" +
 "        }, -- end of [\"clouds\"]\n" +
-"    }, -- end of [\"weather\"]\n" +
-"    [\"theatre\"] = \""+map.dcsname()+"\",\n" +
-"    [\"triggers\"] = \n" +
-"    {\n" +
-"        [\"zones\"] = \n" +
-"        {\n" +
-"        }, -- end of [\"zones\"]\n" +
-"    }, -- end of [\"triggers\"]\n" +
-"    [\"map\"] = \n" +
-"    {\n" +
-"        [\"centerY\"] = 638429.14857143,\n" +
-"        [\"zoom\"] = 131220,\n" +
-"        [\"centerX\"] = -298572.99714286,\n" +
-"    }, -- end of [\"map\"]\n" +
-"    [\"coalitions\"] = \n" +
-"    {\n" +
-"        [\"neutrals\"] = \n" +
-"        {\n" +
-"        }, -- end of [\"neutrals\"]\n" +
-"        [\"blue\"] = \n" +
-"        {\n" +
-"            [1] = 2,\n" +
-"        }, -- end of [\"blue\"]\n" +
-"        [\"red\"] = \n" +
-"        {\n" +
-"            [1] = 7,\n" +
-"        }, -- end of [\"red\"]\n" +
-"    }, -- end of [\"coalitions\"]\n" +
-"    [\"descriptionText\"] = \"\",\n" +
-"    [\"pictureFileNameR\"] = \n" +
-"    {\n" +
-"    }, -- end of [\"pictureFileNameR\"]\n" +
-"    [\"descriptionNeutralsTask\"] = \"\",\n" +
-"    [\"descriptionBlueTask\"] = \"\",\n" +
-"    [\"descriptionRedTask\"] = \"\",\n" +
-"    [\"pictureFileNameB\"] = \n" +
-"    {\n" +
-"    }, -- end of [\"pictureFileNameB\"]\n" +
-"    [\"coalition\"] = \n" +
-"    {\n" +
-"        [\"blue\"] = \n" +
-"        {\n" +
-"            [\"bullseye\"] = \n" +
-"            {\n" +
-"                [\"y\"] = 617414,\n" +
-"                [\"x\"] = -291014,\n" +
-"            }, -- end of [\"bullseye\"]\n" +
-"            [\"nav_points\"] = \n" +
-"            {\n" +
-"            }, -- end of [\"nav_points\"]\n" +
-"            [\"name\"] = \"blue\",\n" +
-"            [\"country\"] = \n" +
-"            {\n" +
-"                [1] = \n" +
-"                {\n" +
-"                    [\"id\"] = 2,\n" +
-"                    [\"name\"] = \"USA\",\n" +
-blueUnits+
-"                }, -- end of [8]\n" +
-"            }, -- end of [\"country\"]\n" +
-"        }, -- end of [\"blue\"]\n" +
-"        [\"red\"] = \n" +
-"        {\n" +
-"            [\"bullseye\"] = \n" +
-"            {\n" +
-"                [\"y\"] = 371700,\n" +
-"                [\"x\"] = 11557,\n" +
-"            }, -- end of [\"bullseye\"]\n" +
-"            [\"nav_points\"] = \n" +
-"            {\n" +
-"            }, -- end of [\"nav_points\"]\n" +
-"            [\"name\"] = \"red\",\n" +
-"            [\"country\"] = \n" +
-"            {\n" +
-"                [1] = \n" +
-"                {\n" +
-"                    [\"id\"] = 7,\n" +
-"                    [\"name\"] = \"USAF Aggressors\",\n" +
-redUnits+
-"                }, -- end of [2]\n" +
-"            }, -- end of [\"country\"]\n" +
-"        }, -- end of [\"red\"]\n" +
-"    }, -- end of [\"coalition\"]\n" +
-"    [\"sortie\"] = \"\",\n" +
-"    [\"version\"] = 16,\n" +
-"    [\"trigrules\"] = \n" +
-"    {\n" +
-"        [1] = \n" +
-"        {\n" +
-"            [\"rules\"] = \n" +
-"            {\n" +
-"                [1] = \n" +
-"                {\n" +
-"                    [\"seconds\"] = "+missionDurationSeconds+",\n" +
-"                    [\"predicate\"] = \"c_time_after\",\n" +
-"                    [\"zone\"] = \"\",\n" +
-"                }, -- end of [1]\n" +
-"            }, -- end of [\"rules\"]\n" +
-"            [\"comment\"] = \"END\",\n" +
-"            [\"eventlist\"] = \"\",\n" +
-"            [\"actions\"] = \n" +
-"            {\n" +
-"                [1] = \n" +
-"                {\n" +
-"                    [\"text\"] = \"\",\n" +
-"                    [\"start_delay\"] = "+missionEndWarningSeconds+",\n" +
-"                    [\"zone\"] = \"\",\n" +
-"                    [\"predicate\"] = \"a_end_mission\",\n" +
-"                    [\"winner\"] = \"\",\n" +
-"                    [\"meters\"] = 1000,\n" +
-"                }, -- end of [1]\n" +
-"            }, -- end of [\"actions\"]\n" +
-"            [\"predicate\"] = \"triggerOnce\",\n" +
-"        }, -- end of [1]\n" +
-"    }, -- end of [\"trigrules\"]\n" +
-"    [\"currentKey\"] = 54,\n" +
-"    [\"start_time\"] = 28800,\n" +
-"    [\"forcedOptions\"] = \n" +
-"    {\n" +
-"    }, -- end of [\"forcedOptions\"]\n" +
-"    [\"failures\"] = \n" +
-"    {\n" +
-"    }, -- end of [\"failures\"]\n" +
-"} -- end of mission\n"
-;
+"    }, -- end of [\"weather\"]\n";
   }
 
   public String addAirbaseAircrafts(Map<Airbases, Map<WarehouseItemCode, BigDecimal>> fullWarehouse) {

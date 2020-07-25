@@ -1,6 +1,7 @@
 package base.game;
 
 import base.game.units.MissionBuilder;
+import base.game.units.MissionConfiguration;
 import base.game.units.OptionsBuilder;
 import base.game.warehouse.WarehouseBuilder;
 import base.game.warehouse.WarehouseItemCode;
@@ -21,6 +22,7 @@ public class FullMissionBuilder {
 
   public void build(
     CampaignMap map,
+    MissionConfiguration configuration,
     Map<CampaignCoalition, Map<Airbases, Map<WarehouseItemCode, BigDecimal>>> warehousesMap,
     List<FactionUnit> blueUnits,
     List<FactionUnit> redUnits,
@@ -30,7 +32,7 @@ public class FullMissionBuilder {
 
       var mb = new MissionBuilder();
 
-      var mission = mb.mission(map, warehousesMap, blueUnits, redUnits);
+      var mission = mb.mission(map, configuration, warehousesMap, blueUnits, redUnits);
       var dictionary = mb.dict();
       var mapResources = mb.mapResource();
       var warehouses = WarehouseBuilder.build(warehousesMap);
