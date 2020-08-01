@@ -19,7 +19,13 @@ public enum Airbases {
   MINVODY(26, "Mineralnye Vody", CAUCASUS, Location.of("44.22835", "43.08255", "1050")),
   NALCHIK(27, "Nalchik", CAUCASUS, Location.of("43.51345", "43.63318", "1411")),
   TBILISI(29, "Tbilisi-Lochini", CAUCASUS, Location.of("41.6704", "44.95535", "1575")),
+  VAZIANI(31, "Vaziani", CAUCASUS, Location.of("41.6285666", "45.0278833", "1526")),
   BESLAN(32, "Beslan", CAUCASUS, Location.of("43.2058", "44.605783", "1742")),
+  MOZDOK(28, "Mozdok", CAUCASUS, Location.of("43.7918", "44.60486", "509")),
+  KRASNODAR_CENTER(13, "Krasnodar-Center", CAUCASUS, Location.of("45.08685", "38.939166", "98")),
+  KRASNODAR_PASH(19, "Krasnodar-Pashkovsky", CAUCASUS, Location.of("45.016666", "39.195166", "112")),
+  NOVOROSSIYSK(14, "Novorossiysk", CAUCASUS, Location.of("44.66838", "37.77855", "131")),
+  GELENDZHIK(17, "Gelendzhik", CAUCASUS, Location.of("44.574033", "38.013233", "72")),
   ;
 
   private final int warehouseId;
