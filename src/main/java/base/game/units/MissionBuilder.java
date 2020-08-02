@@ -304,7 +304,9 @@ redUnits+
 "        }, -- end of [1]\n" +
 "    }, -- end of [\"trigrules\"]\n" +
 "    [\"currentKey\"] = 54,\n" +
-"    [\"forcedOptions\"] = {},\n" +
+"    [\"forcedOptions\"] = {" +
+OptionsBuilder.makeOptions(configuration.options()) +
+"    },\n" +
 "    [\"failures\"] = {},\n" +
 "} -- end of mission\n"
 ;

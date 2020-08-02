@@ -5,11 +5,14 @@ public class OptionsBuilder {
   private OptionsBuilder() {}
 
   public static String build() {
-    return
-"options = \n" +
-"{\n" +
-"    [\"difficulty\"] = \n" +
-"    {\n" +
+    // Options are empoty because makeOptions() is used in the forced options in the mission file instead.
+    return "options = {}";
+  }
+
+  public static String makeOptions(MissionOptions options) {
+return
+"        [\"externalViews\"] = "+options.externalViews()+",\n" +
+    makeExternalViewType(options) +
 "        [\"geffect\"] = \"realistic\",\n" +
 "        [\"padlock\"] = true,\n" +
 "        [\"cockpitStatusBarAllowed\"] = false,\n" +
@@ -20,7 +23,6 @@ public class OptionsBuilder {
 "        [\"miniHUD\"] = false,\n" +
 "        [\"controlsIndicator\"] = false,\n" +
 "        [\"birds\"] = 0,\n" +
-"        [\"optionsView\"] = \"optview_all\",\n" +
 "        [\"permitCrash\"] = true,\n" +
 "        [\"immortal\"] = false,\n" +
 "        [\"easyCommunication\"] = false,\n" +
@@ -36,14 +38,16 @@ public class OptionsBuilder {
 "        [\"tips\"] = true,\n" +
 "        [\"userSnapView\"] = false,\n" +
 "        [\"RBDAI\"] = false,\n" +
-"        [\"externalViews\"] = true,\n" +
 "        [\"iconsTheme\"] = \"russian\",\n" +
 "        [\"avionicsLanguage\"] = \"english\",\n" +
 "        [\"weapons\"] = false,\n" +
 "        [\"setGlobal\"] = true,\n" +
-"        [\"labels\"] = 0,\n" +
-"    }, -- end of [\"difficulty\"]\n" +
-"} -- end of options"
-;
+"        [\"labels\"] = 0,\n";
+  }
+
+  static String makeExternalViewType(MissionOptions options) {
+    return options.externalViewType().map(o ->
+"        [\"optionsView\"] = \""+o.name()+"\",\n"
+).orElse("");
   }
 }

@@ -12,4 +12,5 @@ public interface MissionConfiguration {
   int missionDurationSeconds();
   int tacticalCommanderSlots();
   boolean gameMasterEnabled();
+  MissionOptions options();
 }
