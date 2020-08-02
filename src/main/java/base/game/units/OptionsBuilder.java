@@ -4,9 +4,11 @@ public class OptionsBuilder {
 
   private OptionsBuilder() {}
 
-  public static String build() {
+  public static String build(MissionOptions options) {
     // Options are empoty because makeOptions() is used in the forced options in the mission file instead.
-    return "options = {}";
+    return "options = {\n" +
+      makeOptions(options)+"\n"+
+    "}";
   }
 
   public static String makeOptions(MissionOptions options) {

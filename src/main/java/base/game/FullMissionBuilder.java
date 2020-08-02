@@ -36,7 +36,7 @@ public class FullMissionBuilder {
       var dictionary = mb.dict();
       var mapResources = mb.mapResource();
       var warehouses = WarehouseBuilder.build(warehousesMap);
-      var options = OptionsBuilder.build();
+      var options = OptionsBuilder.build(configuration.options());
       var theatre = map.dcsname();
 
       try (ZipOutputStream zipOut = new ZipOutputStream(out)) {
