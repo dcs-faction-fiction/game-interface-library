@@ -72,7 +72,7 @@ public enum WarehouseItemCode {
   // A/A missiles - Other
 
   MATRA_MAGIC_2  (AMMO, "P_77", List.of("4", "4", "7", "320")),
-  MATRA_S_530_D  (AMMO, "P_77", List.of("4", "4", "7", "321")),
+  MATRA_S_530_D  (AMMO, "P_77", List.of("4", "4", "7", "322")),
 
   // A/G missiles - US
 
