@@ -315,9 +315,6 @@ OptionsBuilder.makeOptions(configuration.options()) +
   public String makeWeather(MissionWeather weather) {
 return
 "    {\n" +
-"        [\"atmosphere_type\"] = 0,\n" +
-"        [\"groundTurbulence\"] = 0,\n" +
-"        [\"enable_fog\"] = false,\n" +
 "        [\"wind\"] = \n" +
 "        {\n" +
 "            [\"at8000\"] = \n" +
@@ -325,38 +322,55 @@ return
 "                [\"speed\"] = 0,\n" +
 "                [\"dir\"] = 0,\n" +
 "            }, -- end of [\"at8000\"]\n" +
-"            [\"at2000\"] = \n" +
-"            {\n" +
-"                [\"speed\"] = 0,\n" +
-"                [\"dir\"] = 0,\n" +
-"            }, -- end of [\"at2000\"]\n" +
 "            [\"atGround\"] = \n" +
 "            {\n" +
 "                [\"speed\"] = 0,\n" +
 "                [\"dir\"] = 0,\n" +
 "            }, -- end of [\"atGround\"]\n" +
+"            [\"at2000\"] = \n" +
+"            {\n" +
+"                [\"speed\"] = 0,\n" +
+"                [\"dir\"] = 0,\n" +
+"            }, -- end of [\"at2000\"]\n" +
 "        }, -- end of [\"wind\"]\n" +
+"        [\"enable_fog\"] = false,\n" +
 "        [\"season\"] = \n" +
 "        {\n" +
 "            [\"temperature\"] = 20,\n" +
 "        }, -- end of [\"season\"]\n" +
-"        [\"type_weather\"] = 0,\n" +
 "        [\"qnh\"] = 760,\n" +
 "        [\"cyclones\"] = \n" +
 "        {\n" +
-"        }, -- end of [\"cyclones\"]\n" +
-"        [\"name\"] = \"Winter, clean sky\",\n" +
-"        [\"fog\"] = \n" +
-"        {\n" +
-"            [\"thickness\"] = 0,\n" +
-"            [\"visibility\"] = 0,\n" +
-"        }, -- end of [\"fog\"]\n" +
+"            [1] = \n" +
+"            {\n" +
+"                [\"pressure_spread\"] = 885463.96452844,\n" +
+"                [\"centerZ\"] = 326372.5083395,\n" +
+"                [\"ellipticity\"] = 1.2352837701773,\n" +
+"                [\"rotation\"] = 1.5138912137956,\n" +
+"                [\"pressure_excess\"] = -1216,\n" +
+"                [\"centerX\"] = -130976.84835996,\n" +
+"            }, -- end of [1]\n" +
+"            [2] = \n" +
+"            {\n" +
+"                [\"pressure_spread\"] = 833927.1114929,\n" +
+"                [\"centerZ\"] = -750368.79265166,\n" +
+"                [\"ellipticity\"] = 1.2352837701773,\n" +
+"                [\"rotation\"] = 1.5138912137956,\n" +
+"                [\"pressure_excess\"] = -1273,\n" +
+"                [\"centerX\"] = 414956.66885519,\n" +
+"            }, -- end of [2]\n" +
+"            [3] = \n" +
+"            {\n" +
+"                [\"pressure_spread\"] = 846429.0764874,\n" +
+"                [\"centerZ\"] = 829548.06612259,\n" +
+"                [\"ellipticity\"] = 1.1917620944344,\n" +
+"                [\"rotation\"] = -0.15306894969126,\n" +
+"                [\"pressure_excess\"] = -1487,\n" +
+"                [\"centerX\"] = 274242.80307743,\n" +
+"            }, -- end of [3]\n" +
+"        }, -- end of [\"cyclones\"],\n" +
 "        [\"dust_density\"] = 0,\n" +
 "        [\"enable_dust\"] = false,\n" +
-"        [\"visibility\"] = \n" +
-"        {\n" +
-"            [\"distance\"] = 80000,\n" +
-"        }, -- end of [\"visibility\"]\n" +
 "        [\"clouds\"] = \n" +
 "        {\n" +
 "            [\"thickness\"] = 200,\n" +
@@ -364,7 +378,21 @@ return
 "            [\"base\"] = 300,\n" +
 "            [\"iprecptns\"] = 0,\n" +
 "        }, -- end of [\"clouds\"]\n" +
-"    }, -- end of [\"weather\"]\n";
+"        [\"atmosphere_type\"] = 1,\n" +
+"        [\"groundTurbulence\"] = 0,\n" +
+"        [\"name_fr\"] = \"Automne, averses\",\n" +
+"        [\"type_weather\"] = 1,\n" +
+"        [\"name\"] = \"Winter, clean sky\",\n" +
+"        [\"fog\"] = \n" +
+"        {\n" +
+"            [\"thickness\"] = 0,\n" +
+"            [\"visibility\"] = 0,\n" +
+"        }, -- end of [\"fog\"]\n" +
+"        [\"visibility\"] = \n" +
+"        {\n" +
+"            [\"distance\"] = 80000,\n" +
+"        }, -- end of [\"visibility\"]\n" +
+"    }";
   }
 
   public String addAirbaseAircrafts(Map<Airbases, Map<WarehouseItemCode, BigDecimal>> fullWarehouse) {
