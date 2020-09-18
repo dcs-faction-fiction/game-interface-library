@@ -28,6 +28,7 @@ public enum WarehouseItemCode {
   // Planes - RUS
 
   SU_27(PLANES, "Su-27", List.of("1", "1", "1", "3")),
+  J_11A(PLANES, "J-11A", List.of("1", "1", "1", "66")),
   SU_33(PLANES, "Su-33", List.of("1", "1", "1", "4")),
   MIG_29_S(PLANES, "MiG-29S", List.of("1", "1", "1", "50")),
 
@@ -121,6 +122,17 @@ public enum WarehouseItemCode {
   ZUNI           (AMMO, "weapons.nurs.Zuni_127", List.of("4", "7", "33", "37")),
   M151           (AMMO, "weapons.nurs.HYDRA_70_M151", List.of("4", "7", "33", "147")),
   M5_HE          (AMMO, "weapons.nurs.HYDRA_70_MK5", List.of("4", "7", "33", "145")),
+
+  // Bombs - RUS
+
+  FAB_250        (AMMO, "weapons.bombs.FAB_250", List.of("4", "5", "9", "6")),
+  FAB_500        (AMMO, "weapons.bombs.FAB_500", List.of("4", "5", "9", "7")),
+
+  // Rockets - RUS
+
+  S_8            (AMMO, "weapons.nurs.C_8",  List.of("4", "7", "33", "32")),
+  S_13           (AMMO, "weapons.nurs.C_13", List.of("4", "7", "33", "33")),
+  S_25           (AMMO, "weapons.nurs.C_25", List.of("4", "7", "33", "35")),
 
   ;
 
