@@ -780,6 +780,9 @@ builtUnits+
     String farpsStr = "";
     for (Airbases farp: farps) {
       farpsStr += "["+ ct++ +"] = \n" + makeFarp(farp);
+      var units = makeFarpUnits(farp.dcsLocation().longitude(), farp.dcsLocation().latitude());
+      for (var unit: units)
+        farpsStr += "["+ ct++ +"] = \n" + unit;
     }
 return
 "                    [\"static\"] = \n" +
@@ -835,5 +838,62 @@ farpsStr+
 "                                [\"name\"] = \""+farp.airbaseName()+"\",\n" +
 "                                [\"dead\"] = false,\n" +
 "                            },\n";
+  }
+
+  public List<String> makeFarpUnits(BigDecimal x, BigDecimal y) {
+    var correctedy = y.add(new BigDecimal(-60d));
+    var correctedx = x.add(new BigDecimal(  0d));
+    var ct = new int[]{0};
+    return Map.of(
+      "kp_ug", "FARP CP Blindage",
+      "GSM Rus", "FARP Fuel Depot",
+      "SetkaKP", "FARP Ammo Dump Coating",
+      "PalatkaB", "FARP Tent")
+      .entrySet()
+      .stream().map(t -> {
+        var id = nextId++;
+        var newx = correctedx.add(new BigDecimal(20d * ct[0]));
+        ct[0] = ct[0] + 1;
+        return
+"                            {\n" +
+"                                [\"heading\"] = 0,\n" +
+"                                [\"groupId\"] = "+id+",\n" +
+"                                [\"route\"] = \n" +
+"                                {\n" +
+"                                    [\"points\"] = \n" +
+"                                    {\n" +
+"                                        [1] = \n" +
+"                                        {\n" +
+"                                            [\"alt\"] = 0,\n" +
+"                                            [\"type\"] = \"\",\n" +
+"                                            [\"name\"] = \"\",\n" +
+"                                            [\"y\"] = "+correctedy+",\n" +
+"                                            [\"speed\"] = 0,\n" +
+"                                            [\"x\"] = "+newx+",\n" +
+"                                            [\"formation_template\"] = \"\",\n" +
+"                                            [\"action\"] = \"\",\n" +
+"                                        }, -- end of [1]\n" +
+"                                    }, -- end of [\"points\"]\n" +
+"                                }, -- end of [\"route\"]\n" +
+"                                [\"units\"] = \n" +
+"                                {\n" +
+"                                    [1] = \n" +
+"                                    {\n" +
+"                                        [\"category\"] = \"Fortifications\",\n" +
+"                                        [\"shape_name\"] = \""+t.getKey()+"\",\n" +
+"                                        [\"type\"] = \""+t.getValue()+"\",\n" +
+"                                        [\"unitId\"] = "+id+",\n" +
+"                                        [\"y\"] = "+correctedy+",\n" +
+"                                        [\"x\"] = "+newx+",\n" +
+"                                        [\"name\"] = \"\",\n" +
+"                                        [\"heading\"] = 0,\n" +
+"                                    }, -- end of [1]\n" +
+"                                }, -- end of [\"units\"]\n" +
+"                                [\"y\"] = "+correctedy+",\n" +
+"                                [\"x\"] = "+newx+",\n" +
+"                                [\"name\"] = \"\",\n" +
+"                                [\"dead\"] = false,\n" +
+"                            },\n";
+      }).collect(toList());
   }
 }
