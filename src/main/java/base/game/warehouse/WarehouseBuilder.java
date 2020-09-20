@@ -27,7 +27,7 @@ public final class WarehouseBuilder {
     var builtMobileAirbases = new StringBuilder();
     for (var e1: warehouses.entrySet())
       for (var e2: e1.getValue().entrySet())
-        if (e2.getKey().farp())
+        if (e2.getKey().farp() || e2.getKey().carrier())
           builtMobileAirbases.append(buildAirbase(e2.getKey(), e1.getKey(), e2.getValue()));
         else
           builtAirbases.append(buildAirbase(e2.getKey(), e1.getKey(), e2.getValue()));
