@@ -7,6 +7,7 @@ import static base.game.CampaignCoalition.RED;
 import base.game.CampaignMap;
 import base.game.FactionUnit;
 import base.game.Parkings;
+import static base.game.units.MakeFarpStatic.makeFarpKaspi;
 import static base.game.warehouse.WarehouseItemCategory.HELICOPTERS;
 import static base.game.warehouse.WarehouseItemCategory.PLANES;
 import base.game.warehouse.WarehouseItemCode;
@@ -62,6 +63,8 @@ return
 
     var blueWarehouses = warehouses.computeIfAbsent(BLUE, k -> new EnumMap<>(Airbases.class));
     var redWarehouses = warehouses.computeIfAbsent(RED, k -> new EnumMap<>(Airbases.class));
+    var blueFarps = blueWarehouses.keySet().stream().filter(Airbases::farp).collect(toList());
+    var redFarps = redWarehouses.keySet().stream().filter(Airbases::farp).collect(toList());
 
     blueUnits += addAirbaseAircrafts(blueWarehouses);
     redUnits += addAirbaseAircrafts(redWarehouses);
@@ -248,6 +251,7 @@ weather +
 "                    [\"id\"] = 2,\n" +
 "                    [\"name\"] = \"USA\",\n" +
 blueUnits+
+makeFarps(blueFarps)+
 "                }, -- end of [8]\n" +
 "            }, -- end of [\"country\"]\n" +
 "        }, -- end of [\"blue\"]\n" +
@@ -267,6 +271,7 @@ blueUnits+
 "                    [\"id\"] = 7,\n" +
 "                    [\"name\"] = \"USAF Aggressors\",\n" +
 redUnits+
+makeFarps(redFarps)+
 "                }, -- end of [2]\n" +
 "            }, -- end of [\"country\"]\n" +
 "        }, -- end of [\"red\"]\n" +
@@ -420,6 +425,8 @@ return
         var k = e.getKey();
         var v = Integer.valueOf(e.getValue().toBigInteger().toString());
         for (int ct = 0; ct < v; ct++) {
+          if (airbase.farp())
+            continue;
           var parking = parkings.get(parkingCt++);
           builtPlanes +=
   "                            ["+(luactplanes)+"] = \n" +
@@ -436,13 +443,22 @@ return
         var k = e.getKey();
         var v = Integer.valueOf(e.getValue().toBigInteger().toString());
         for (int ct = 0; ct < v; ct++) {
-          var parking = parkings.get(parkingCt++);
-          builtHelos +=
+          if (airbase.farp()) {
+            builtHelos +=
+  "                            ["+(luacthelos)+"] = \n" +
+  "                            {\n" +
+  buildParkedUnitInFarp(nextId++, k.dcsname(), airbase.warehouseId(), parkings.get(0))+
+  "                            }, -- end of ["+(luacthelos)+"]\n"
+  ;
+          } else {
+            var parking = parkings.get(parkingCt++);
+            builtHelos +=
   "                            ["+(luacthelos)+"] = \n" +
   "                            {\n" +
   buildParkedUnit(nextId++, k.dcsname(), airbase.warehouseId(), parking)+
   "                            }, -- end of ["+(luacthelos)+"]\n"
   ;
+          }
           luacthelos++;
         }
       }
@@ -569,6 +585,100 @@ builtPlanes+
 "                                [\"frequency\"] = 305,\n";
   }
 
+  public String buildParkedUnitInFarp(int id, String type, int airdromeId, List<String> parking) {
+    var name = "ParkedUnit "+id;
+    var x = parking.get(2);
+    var y = parking.get(3);
+    dict.add(name);
+    return
+"                                [\"modulation\"] = 0,\n" +
+"                                [\"tasks\"] = \n" +
+"                                {\n" +
+"                                }, -- end of [\"tasks\"]\n" +
+"                                [\"task\"] = \"CAS\",\n" +
+"                                [\"uncontrolled\"] = false,\n" +
+"                                [\"route\"] = \n" +
+"                                {\n" +
+"                                    [\"points\"] = \n" +
+"                                    {\n" +
+"                                        [1] = \n" +
+"                                        {\n" +
+"                                            [\"alt\"] = 531,\n" +
+"                                            [\"action\"] = \"From Parking Area\",\n" +
+"                                            [\"alt_type\"] = \"BARO\",\n" +
+"                                            [\"linkUnit\"] = "+airdromeId+",\n" +
+"                                            [\"helipadId\"] = "+airdromeId+",\n" +
+"                                            [\"speed\"] = 41.666666666667,\n" +
+"                                            [\"task\"] = \n" +
+"                                            {\n" +
+"                                                [\"id\"] = \"ComboTask\",\n" +
+"                                                [\"params\"] = \n" +
+"                                                {\n" +
+"                                                    [\"tasks\"] = \n" +
+"                                                    {\n" +
+"                                                    }, -- end of [\"tasks\"]\n" +
+"                                                }, -- end of [\"params\"]\n" +
+"                                            }, -- end of [\"task\"]\n" +
+"                                            [\"type\"] = \"TakeOffParking\",\n" +
+"                                            [\"ETA\"] = 0,\n" +
+"                                            [\"ETA_locked\"] = true,\n" +
+"                                            [\"y\"] = "+y+",\n" +
+"                                            [\"x\"] = "+x+",\n" +
+"                                            [\"name\"] = \""+name+"\",\n" +
+"                                            [\"formation_template\"] = \"\",\n" +
+"                                            [\"speed_locked\"] = true,\n" +
+"                                        }, -- end of [1]\n" +
+"                                    }, -- end of [\"points\"]\n" +
+"                                }, -- end of [\"route\"]\n" +
+"                                [\"groupId\"] = "+id+",\n" +
+"                                [\"hidden\"] = false,\n" +
+"                                [\"units\"] = \n" +
+"                                {\n" +
+"                                    [1] = \n" +
+"                                    {\n" +
+"                                        [\"alt\"] = 531,\n" +
+"                                        [\"alt_type\"] = \"BARO\",\n" +
+"                                        [\"livery_id\"] = \"36STV_386_Addestramento\",\n" +
+"                                        [\"skill\"] = \"Client\",\n" +
+"                                        [\"parking\"] = \"1\",\n" +
+"                                        [\"ropeLength\"] = 15,\n" +
+"                                        [\"speed\"] = 41.666666666667,\n" +
+"                                        [\"type\"] = \""+type+"\",\n" +
+"                                        [\"unitId\"] = "+id+",\n" +
+"                                        [\"psi\"] = 0,\n" +
+"                                        [\"parking_id\"] = \"1\",\n" +
+"                                        [\"x\"] = "+x+",\n" +
+"                                        [\"name\"] = \""+name+"\",\n" +
+"                                        [\"payload\"] = \n" +
+"                                        {\n" +
+"                                            [\"pylons\"] = \n" +
+"                                            {\n" +
+"                                            }, -- end of [\"pylons\"]\n" +
+"                                            [\"fuel\"] = \"0\",\n" +
+"                                            [\"flare\"] = 0,\n" +
+"                                            [\"chaff\"] = 0,\n" +
+"                                            [\"gun\"] = 0,\n" +
+"                                        }, -- end of [\"payload\"]\n" +
+"                                        [\"y\"] = "+y+",\n" +
+"                                        [\"heading\"] = 0,\n" +
+"                                        [\"callsign\"] = \n" +
+"                                        {\n" +
+"                                            [1] = 1,\n" +
+"                                            [2] = 1,\n" +
+"                                            [3] = 1,\n" +
+"                                            [\"name\"] = \"Enfield11\",\n" +
+"                                        }, -- end of [\"callsign\"]\n" +
+"                                        [\"onboard_num\"] = \"050\",\n" +
+"                                    }, -- end of [1]\n" +
+"                                }, -- end of [\"units\"]\n" +
+"                                [\"y\"] = "+y+",\n" +
+"                                [\"x\"] = "+x+",\n" +
+"                                [\"name\"] = \""+name+"\",\n" +
+"                                [\"communication\"] = true,\n" +
+"                                [\"start_time\"] = 0,\n" +
+"                                [\"frequency\"] = 124,\n";
+  }
+
   public String addGroundUnits(List<FactionUnit> units) {
     String builtUnits = "";
     int luact = 1;
@@ -664,5 +774,25 @@ builtUnits+
 "                                [\"x\"] = 0,\n" +
 "                                [\"name\"] = \""+name+"\",\n" +
 "                                [\"start_time\"] = 0,\n";
+  }
+
+  private String makeFarps(List<Airbases> farps) {
+    long ct = 1;
+    String farpsStr = "";
+    for (Airbases farp: farps) {
+      switch (farp) {
+        case FARP_KASPI:
+          farpsStr += "["+ ct++ +"] = " + makeFarpKaspi();
+          break;
+      }
+    }
+return
+"                    [\"static\"] = \n" +
+"                    {\n" +
+"                        [\"group\"] = \n" +
+"                        {\n" +
+farpsStr+
+"                        }, -- end of [\"group\"]\n" +
+"                    }, -- end of [\"static\"]\n";
   }
 }

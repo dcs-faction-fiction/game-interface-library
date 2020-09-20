@@ -13,7 +13,7 @@ public class Parkings {
 
   static {
     MAP = new HashMap<>();
-//<editor-fold defaultstate="collapsed" desc="parkings">
+//<editor-fold defaultstate="collapsed" desc="parkings caucasus airfields">
 addParking(CAUCASUS, "20", "7", "03", "-219701.333165", "563868.443922");
 addParking(CAUCASUS, "23", "18", "10", "-281233.125000", "646211.187500");
 addParking(CAUCASUS, "23", "19", "11", "-281215.906250", "646252.000000");
@@ -910,6 +910,9 @@ addParking(CAUCASUS, "12", "48", "45", "-5496.174805", "241543.984375");
 addParking(CAUCASUS, "12", "4", "42", "-5305.718274", "241653.994660");
 addParking(CAUCASUS, "12", "45", "46", "-5413.479855", "241545.640988");
 addParking(CAUCASUS, "12", "50", "44", "-5482.233249", "241466.252060");
+//</editor-fold>
+//<editor-fold defaultstate="collapsed" desc="parkings caucasus farps">
+addParking(CAUCASUS, "10000", "", "", "-292996.10596527", "845020.76607711");
 //</editor-fold>
   }
 

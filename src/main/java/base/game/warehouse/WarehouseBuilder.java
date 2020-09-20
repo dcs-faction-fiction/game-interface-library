@@ -24,9 +24,13 @@ public final class WarehouseBuilder {
     Map<CampaignCoalition, Map<Airbases, Map<WarehouseItemCode, BigDecimal>>> warehouses) {
 
     var builtAirbases = new StringBuilder();
+    var builtMobileAirbases = new StringBuilder();
     for (var e1: warehouses.entrySet())
       for (var e2: e1.getValue().entrySet())
-        builtAirbases.append(buildAirbase(e2.getKey(), e1.getKey(), e2.getValue()));
+        if (e2.getKey().farp())
+          builtMobileAirbases.append(buildAirbase(e2.getKey(), e1.getKey(), e2.getValue()));
+        else
+          builtAirbases.append(buildAirbase(e2.getKey(), e1.getKey(), e2.getValue()));
 
     return
 "warehouses = \n"+
@@ -37,6 +41,7 @@ public final class WarehouseBuilder {
 "    }, -- end of [\"airports\"]\n" +
 "    [\"warehouses\"] = \n" +
 "    {\n" +
+         builtMobileAirbases.toString() +
 "    }, -- end of [\"warehouses\"]\n" +
 "} -- end of warehouses\n";
   }
