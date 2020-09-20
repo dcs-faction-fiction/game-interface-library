@@ -7,7 +7,6 @@ import static base.game.CampaignCoalition.RED;
 import base.game.CampaignMap;
 import base.game.FactionUnit;
 import base.game.Parkings;
-import static base.game.units.MakeFarpStatic.makeFarpKaspi;
 import static base.game.warehouse.WarehouseItemCategory.HELICOPTERS;
 import static base.game.warehouse.WarehouseItemCategory.PLANES;
 import base.game.warehouse.WarehouseItemCode;
@@ -780,11 +779,7 @@ builtUnits+
     long ct = 1;
     String farpsStr = "";
     for (Airbases farp: farps) {
-      switch (farp) {
-        case FARP_KASPI:
-          farpsStr += "["+ ct++ +"] = " + makeFarpKaspi();
-          break;
-      }
+      farpsStr += "["+ ct++ +"] = \n" + makeFarp(farp);
     }
 return
 "                    [\"static\"] = \n" +
@@ -794,5 +789,51 @@ return
 farpsStr+
 "                        }, -- end of [\"group\"]\n" +
 "                    }, -- end of [\"static\"]\n";
+  }
+
+  public static String makeFarp(Airbases farp) {
+    return
+"                            {\n" +
+"                                [\"groupId\"] = "+farp.warehouseId()+",\n" +
+"                                [\"heading\"] = 0,\n" +
+"                                [\"route\"] = \n" +
+"                                {\n" +
+"                                    [\"points\"] = \n" +
+"                                    {\n" +
+"                                        [1] = \n" +
+"                                        {\n" +
+"                                            [\"alt\"] = 0,\n" +
+"                                            [\"type\"] = \"\",\n" +
+"                                            [\"name\"] = \"\",\n" +
+"                                            [\"y\"] = "+farp.dcsLocation().latitude()+",\n" +
+"                                            [\"speed\"] = 0,\n" +
+"                                            [\"x\"] = "+farp.dcsLocation().longitude()+",\n" +
+"                                            [\"formation_template\"] = \"\",\n" +
+"                                            [\"action\"] = \"\",\n" +
+"                                        }, -- end of [1]\n" +
+"                                    }, -- end of [\"points\"]\n" +
+"                                }, -- end of [\"route\"]\n" +
+"                                [\"units\"] = \n" +
+"                                {\n" +
+"                                    [1] = \n" +
+"                                    {\n" +
+"                                        [\"category\"] = \"Heliports\",\n" +
+"                                        [\"shape_name\"] = \"FARPS\",\n" +
+"                                        [\"type\"] = \"FARP\",\n" +
+"                                        [\"unitId\"] = "+farp.warehouseId()+",\n" +
+"                                        [\"heliport_frequency\"] = 127.5,\n" +
+"                                        [\"y\"] = "+farp.dcsLocation().latitude()+",\n" +
+"                                        [\"x\"] = "+farp.dcsLocation().longitude()+",\n" +
+"                                        [\"name\"] = \""+farp.airbaseName()+"\",\n" +
+"                                        [\"heliport_modulation\"] = 0,\n" +
+"                                        [\"heliport_callsign_id\"] = 1,\n" +
+"                                        [\"heading\"] = 0,\n" +
+"                                    }, -- end of [1]\n" +
+"                                }, -- end of [\"units\"]\n" +
+"                                [\"y\"] = "+farp.dcsLocation().latitude()+",\n" +
+"                                [\"x\"] = "+farp.dcsLocation().longitude()+",\n" +
+"                                [\"name\"] = \""+farp.airbaseName()+"\",\n" +
+"                                [\"dead\"] = false,\n" +
+"                            },\n";
   }
 }
