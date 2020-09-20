@@ -64,12 +64,14 @@ return
     var redWarehouses = warehouses.computeIfAbsent(RED, k -> new EnumMap<>(Airbases.class));
     var blueFarps = blueWarehouses.keySet().stream().filter(Airbases::farp).collect(toList());
     var redFarps = redWarehouses.keySet().stream().filter(Airbases::farp).collect(toList());
+    var blueCarriers = blueWarehouses.keySet().stream().filter(Airbases::carrier).collect(toList());
+    var redCarriers = redWarehouses.keySet().stream().filter(Airbases::carrier).collect(toList());
 
     blueUnits += addAirbaseAircrafts(blueWarehouses);
     redUnits += addAirbaseAircrafts(redWarehouses);
 
-    blueUnits += addGroundUnits(blueUnitsGround);
-    redUnits += addGroundUnits(redUnitsGround);
+    blueUnits += addGroundUnits(blueCarriers, blueUnitsGround);
+    redUnits += addGroundUnits(redCarriers, redUnitsGround);
 
     var clock = configuration.time().seconds()
       + configuration.time().minutes() * 60
@@ -251,6 +253,7 @@ weather +
 "                    [\"name\"] = \"USA\",\n" +
 blueUnits+
 makeFarps(blueFarps)+
+makeCarriers(blueCarriers)+
 "                }, -- end of [8]\n" +
 "            }, -- end of [\"country\"]\n" +
 "        }, -- end of [\"blue\"]\n" +
@@ -271,6 +274,7 @@ makeFarps(blueFarps)+
 "                    [\"name\"] = \"USAF Aggressors\",\n" +
 redUnits+
 makeFarps(redFarps)+
+makeCarriers(redCarriers)+
 "                }, -- end of [2]\n" +
 "            }, -- end of [\"country\"]\n" +
 "        }, -- end of [\"red\"]\n" +
@@ -426,14 +430,24 @@ return
         for (int ct = 0; ct < v; ct++) {
           if (airbase.farp())
             continue;
-          var parking = parkings.get(parkingCt++);
-          builtPlanes +=
-  "                            ["+(luactplanes)+"] = \n" +
-  "                            {\n" +
-  buildParkedUnit(nextId++, k.dcsname(), airbase.warehouseId(), parking)+
-  "                            }, -- end of ["+(luactplanes)+"]\n"
-  ;
-          luactplanes++;
+          if (airbase.carrier()) {
+            builtPlanes +=
+"                            ["+(luactplanes)+"] = \n" +
+"                            {\n" +
+buildParkedUnitCarrier(nextId++, k.dcsname(), airbase.warehouseId(), parkings.get(0))+
+"                            }, -- end of ["+(luactplanes)+"]\n"
+;
+            luactplanes++;
+          } else {
+            var parking = parkings.get(parkingCt++);
+            builtPlanes +=
+"                            ["+(luactplanes)+"] = \n" +
+"                            {\n" +
+buildParkedUnit(nextId++, k.dcsname(), airbase.warehouseId(), parking)+
+"                            }, -- end of ["+(luactplanes)+"]\n"
+;
+            luactplanes++;
+          }
         }
       }
 
@@ -442,21 +456,21 @@ return
         var k = e.getKey();
         var v = Integer.valueOf(e.getValue().toBigInteger().toString());
         for (int ct = 0; ct < v; ct++) {
-          if (airbase.farp()) {
+          if (airbase.farp() || airbase.carrier()) {
             builtHelos +=
-  "                            ["+(luacthelos)+"] = \n" +
-  "                            {\n" +
-  buildParkedUnitInFarp(nextId++, k.dcsname(), airbase.warehouseId(), parkings.get(0))+
-  "                            }, -- end of ["+(luacthelos)+"]\n"
-  ;
+"                            ["+(luacthelos)+"] = \n" +
+"                            {\n" +
+buildParkedUnitInFarp(nextId++, k.dcsname(), airbase.warehouseId(), parkings.get(0))+
+"                            }, -- end of ["+(luacthelos)+"]\n"
+;
           } else {
             var parking = parkings.get(parkingCt++);
             builtHelos +=
-  "                            ["+(luacthelos)+"] = \n" +
-  "                            {\n" +
-  buildParkedUnit(nextId++, k.dcsname(), airbase.warehouseId(), parking)+
-  "                            }, -- end of ["+(luacthelos)+"]\n"
-  ;
+"                            ["+(luacthelos)+"] = \n" +
+"                            {\n" +
+buildParkedUnit(nextId++, k.dcsname(), airbase.warehouseId(), parking)+
+"                            }, -- end of ["+(luacthelos)+"]\n"
+;
           }
           luacthelos++;
         }
@@ -678,7 +692,101 @@ builtPlanes+
 "                                [\"frequency\"] = 124,\n";
   }
 
-  public String addGroundUnits(List<FactionUnit> units) {
+  public String buildParkedUnitCarrier(int id, String type, int airdromeId, List<String> parking) {
+    var name = "ParkedUnit "+id;
+    var x = parking.get(2);
+    var y = parking.get(3);
+    dict.add(name);
+    return
+"                                [\"modulation\"] = 0,\n" +
+"                                [\"tasks\"] = \n" +
+"                                {\n" +
+"                                }, -- end of [\"tasks\"]\n" +
+"                                [\"task\"] = \"CAS\",\n" +
+"                                [\"uncontrolled\"] = false,\n" +
+"                                [\"route\"] = \n" +
+"                                {\n" +
+"                                    [\"points\"] = \n" +
+"                                    {\n" +
+"                                        [1] = \n" +
+"                                        {\n" +
+"                                            [\"alt\"] = 531,\n" +
+"                                            [\"action\"] = \"From Parking Area\",\n" +
+"                                            [\"alt_type\"] = \"BARO\",\n" +
+"                                            [\"linkUnit\"] = "+airdromeId+",\n" +
+"                                            [\"helipadId\"] = "+airdromeId+",\n" +
+"                                            [\"speed\"] = 41.666666666667,\n" +
+"                                            [\"task\"] = \n" +
+"                                            {\n" +
+"                                                [\"id\"] = \"ComboTask\",\n" +
+"                                                [\"params\"] = \n" +
+"                                                {\n" +
+"                                                    [\"tasks\"] = \n" +
+"                                                    {\n" +
+"                                                    }, -- end of [\"tasks\"]\n" +
+"                                                }, -- end of [\"params\"]\n" +
+"                                            }, -- end of [\"task\"]\n" +
+"                                            [\"type\"] = \"TakeOffParking\",\n" +
+"                                            [\"ETA\"] = 0,\n" +
+"                                            [\"ETA_locked\"] = true,\n" +
+"                                            [\"y\"] = "+y+",\n" +
+"                                            [\"x\"] = "+x+",\n" +
+"                                            [\"name\"] = \""+name+"\",\n" +
+"                                            [\"formation_template\"] = \"\",\n" +
+"                                            [\"speed_locked\"] = true,\n" +
+"                                        }, -- end of [1]\n" +
+"                                    }, -- end of [\"points\"]\n" +
+"                                }, -- end of [\"route\"]\n" +
+"                                [\"groupId\"] = "+id+",\n" +
+"                                [\"hidden\"] = false,\n" +
+"                                [\"units\"] = \n" +
+"                                {\n" +
+"                                    [1] = \n" +
+"                                    {\n" +
+"                                        [\"alt\"] = 531,\n" +
+"                                        [\"alt_type\"] = \"BARO\",\n" +
+"                                        [\"livery_id\"] = \"36STV_386_Addestramento\",\n" +
+"                                        [\"skill\"] = \"Client\",\n" +
+"                                        [\"parking\"] = \"1\",\n" +
+"                                        [\"ropeLength\"] = 15,\n" +
+"                                        [\"speed\"] = 41.666666666667,\n" +
+"                                        [\"type\"] = \""+type+"\",\n" +
+"                                        [\"unitId\"] = "+id+",\n" +
+"                                        [\"psi\"] = 0,\n" +
+"                                        [\"parking_id\"] = \"1\",\n" +
+"                                        [\"x\"] = "+x+",\n" +
+"                                        [\"name\"] = \""+name+"\",\n" +
+"                                        [\"payload\"] = \n" +
+"                                        {\n" +
+"                                            [\"pylons\"] = \n" +
+"                                            {\n" +
+"                                            }, -- end of [\"pylons\"]\n" +
+"                                            [\"fuel\"] = \"0\",\n" +
+"                                            [\"flare\"] = 0,\n" +
+"                                            [\"chaff\"] = 0,\n" +
+"                                            [\"gun\"] = 0,\n" +
+"                                        }, -- end of [\"payload\"]\n" +
+"                                        [\"y\"] = "+y+",\n" +
+"                                        [\"heading\"] = 0,\n" +
+"                                        [\"callsign\"] = \n" +
+"                                        {\n" +
+"                                            [1] = 1,\n" +
+"                                            [2] = 1,\n" +
+"                                            [3] = 1,\n" +
+"                                            [\"name\"] = \"Enfield11\",\n" +
+"                                        }, -- end of [\"callsign\"]\n" +
+"                                        [\"onboard_num\"] = \"050\",\n" +
+"                                    }, -- end of [1]\n" +
+"                                }, -- end of [\"units\"]\n" +
+"                                [\"y\"] = "+y+",\n" +
+"                                [\"x\"] = "+x+",\n" +
+"                                [\"name\"] = \""+name+"\",\n" +
+"                                [\"communication\"] = true,\n" +
+"                                [\"start_time\"] = 0,\n" +
+"                                [\"frequency\"] = 124,\n";
+  }
+
+  public String addGroundUnits(List<Airbases> carriers, List<FactionUnit> units) {
     String builtUnits = "";
     int luact = 1;
     for (var unit: units) {
@@ -895,5 +1003,114 @@ farpsStr+
 "                                [\"dead\"] = false,\n" +
 "                            },\n";
       }).collect(toList());
+  }
+
+  private String makeCarriers(List<Airbases> carriers) {
+    long ct = 1;
+    String carrierStr = "";
+    for (Airbases carrier: carriers) {
+      carrierStr +=
+"                            ["+ ct++ +"] = \n" +
+"                            {\n"+
+        makeCarrier(carrier)+
+"                            }\n";
+    }
+return
+"                    [\"ship\"] = \n" +
+"                    {\n" +
+"                        [\"group\"] = \n" +
+"                        {\n" +
+carrierStr+
+"                        }, -- end of [\"group\"]\n" +
+"                    }, -- end of [\"ship\"]\n";
+  }
+
+  String makeCarrier(Airbases carrier) {
+    return
+"                                [\"visible\"] = false,\n" +
+"                                [\"tasks\"] = \n" +
+"                                {\n" +
+"                                }, -- end of [\"tasks\"]\n" +
+"                                [\"uncontrollable\"] = false,\n" +
+"                                [\"route\"] = \n" +
+"                                {\n" +
+"                                    [\"points\"] = \n" +
+"                                    {\n" +
+"                                        [1] = \n" +
+"                                        {\n" +
+"                                            [\"alt\"] = -0,\n" +
+"                                            [\"type\"] = \"Turning Point\",\n" +
+"                                            [\"ETA\"] = 0,\n" +
+"                                            [\"alt_type\"] = \"BARO\",\n" +
+"                                            [\"formation_template\"] = \"\",\n" +
+"                                            [\"y\"] = "+carrier.dcsLocation().latitude()+",\n" +
+"                                            [\"x\"] = "+carrier.dcsLocation().longitude()+",\n" +
+"                                            [\"name\"] = \""+carrier.airbaseName()+"\",\n" +
+"                                            [\"ETA_locked\"] = true,\n" +
+"                                            [\"speed\"] = 0,\n" +
+"                                            [\"action\"] = \"Turning Point\",\n" +
+"                                            [\"task\"] = \n" +
+"                                            {\n" +
+"                                                [\"id\"] = \"ComboTask\",\n" +
+"                                                [\"params\"] = \n" +
+"                                                {\n" +
+"                                                    [\"tasks\"] = \n" +
+"                                                    {\n" +
+"                                                        [1] = \n" +
+"                                                        {\n" +
+"                                                            [\"enabled\"] = true,\n" +
+"                                                            [\"auto\"] = true,\n" +
+"                                                            [\"id\"] = \"WrappedAction\",\n" +
+"                                                            [\"number\"] = 1,\n" +
+"                                                            [\"params\"] = \n" +
+"                                                            {\n" +
+"                                                                [\"action\"] = \n" +
+"                                                                {\n" +
+"                                                                    [\"id\"] = \"ActivateBeacon\",\n" +
+"                                                                    [\"params\"] = \n" +
+"                                                                    {\n" +
+"                                                                        [\"type\"] = 4,\n" +
+"                                                                        [\"frequency\"] = 1088000000,\n" +
+"                                                                        [\"callsign\"] = \"TKR\",\n" +
+"                                                                        [\"channel\"] = 1,\n" +
+"                                                                        [\"modeChannel\"] = \"X\",\n" +
+"                                                                        [\"bearing\"] = true,\n" +
+"                                                                        [\"system\"] = 4,\n" +
+"                                                                    }, -- end of [\"params\"]\n" +
+"                                                                }, -- end of [\"action\"]\n" +
+"                                                            }, -- end of [\"params\"]\n" +
+"                                                        }, -- end of [1]\n" +
+"                                                    }, -- end of [\"tasks\"]\n" +
+"                                                }, -- end of [\"params\"]\n" +
+"                                            }, -- end of [\"task\"]\n" +
+"                                            [\"speed_locked\"] = true,\n" +
+"                                        }, -- end of [1]\n" +
+"                                    }, -- end of [\"points\"]\n" +
+"                                }, -- end of [\"route\"]\n" +
+"                                [\"groupId\"] = "+carrier.warehouseId()+",\n" +
+"                                [\"hidden\"] = false,\n" +
+"                                [\"units\"] = \n" +
+"                                {\n" +
+"                                    [1] = \n" +
+"                                    {\n" +
+"                                        [\"transportable\"] = \n" +
+"                                        {\n" +
+"                                            [\"randomTransportable\"] = false,\n" +
+"                                        }, -- end of [\"transportable\"]\n" +
+"                                        [\"skill\"] = \"Average\",\n" +
+"                                        [\"type\"] = \"CVN_71\",\n" +
+"                                        [\"unitId\"] = "+carrier.warehouseId()+",\n" +
+"                                        [\"y\"] = "+carrier.dcsLocation().latitude()+",\n" +
+"                                        [\"x\"] = "+carrier.dcsLocation().longitude()+",\n" +
+"                                        [\"name\"] = \""+carrier.airbaseName()+"\",\n" +
+"                                        [\"heading\"] = 0,\n" +
+"                                        [\"modulation\"] = 0,\n" +
+"                                        [\"frequency\"] = 127500000,\n" +
+"                                    }, -- end of [1]\n" +
+"                                }, -- end of [\"units\"]\n" +
+"                                [\"y\"] = "+carrier.dcsLocation().latitude()+",\n" +
+"                                [\"x\"] = "+carrier.dcsLocation().longitude()+",\n" +
+"                                [\"name\"] = \""+carrier.airbaseName()+"\",\n" +
+"                                [\"start_time\"] = 0,";
   }
 }
