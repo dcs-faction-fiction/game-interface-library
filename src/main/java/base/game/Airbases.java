@@ -28,6 +28,9 @@ public enum Airbases {
   GELENDZHIK(17, "Gelendzhik", CAUCASUS, Location.of("44.574033", "38.013233", "72"), null, false),
   // Farps
   FARP_KASPI(10_000, "FARP_Kaspi", CAUCASUS, Location.of("41.929666", "44.38475", "1742"), Location.of("845020.76607711", "-292996.10596527"), true),
+  FARP_ZESTAFONI(10_001, "FARP_Zestafoni", CAUCASUS, Location.of("42.120816666", "43.018833333", "538"), Location.of("729058.71395477", "-286082.8441803"), true),
+  FARP_KHASHURI(10_002, "FARP_Zestafoni", CAUCASUS, Location.of("41.9852166", "43.6325333", "2254"), Location.of("781760.20100281", "-294944.51849995"), true),
+  FARP_GORI(10_003, "FARP_Zestafoni", CAUCASUS, Location.of("41.89838333", "44.10433333", "1936"), Location.of("820716.94095054", "-288448.86308349"), true),
   ;
 
   private final int warehouseId;
