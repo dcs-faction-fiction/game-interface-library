@@ -47,8 +47,8 @@ public enum WarehouseItemCode {
 
   // A/A missiles - US
 
-  AIM_120_B      (AMMO, "AIM_120", List.of("4", "4", "7", "24")),
-  AIM_120_C      (AMMO, "AIM_120C", List.of("4", "4", "7", "106")),
+  AIM_120_B      (AMMO, "weapons.missiles.AIM_120", List.of("4", "4", "7", "24")),
+  AIM_120_C      (AMMO, "weapons.missiles.AIM_120C", List.of("4", "4", "7", "106")),
   AIM_54_A_MK_47 (AMMO, "AIM_54A_Mk47", List.of("4", "4", "7", "312")),
   AIM_54_A_MK_60 (AMMO, "AIM_54A_Mk60", List.of("4", "4", "7", "313")),
   AIM_54_C_MK_47 (AMMO, "AIM_54C_Mk47", List.of("4", "4", "7", "314")),
@@ -83,7 +83,7 @@ public enum WarehouseItemCode {
 
   AGM_65_D       (AMMO, "weapons.missiles.AGM_65D", List.of("4", "4", "8", "77")),
   AGM_65_E       (AMMO, "weapons.missiles.AGM_65E", List.of("4", "4", "8", "70")),
-  AGM_65_F       (AMMO, "weapons.missiles.AGM_65F", List.of("4", "4", "8", "271")),
+  AGM_65_F       (AMMO, "weapons.missiles.AGM_65F", List.of("4", "4", "8", "272")),
   AGM_65_G       (AMMO, "weapons.missiles.AGM_65G", List.of("4", "4", "8", "139")),
   AGM_65_H       (AMMO, "weapons.missiles.AGM_65H", List.of("4", "4", "8", "138")),
   AGM_65_K       (AMMO, "weapons.missiles.AGM_65K", List.of("4", "4", "8", "61")),
