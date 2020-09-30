@@ -44,6 +44,7 @@ public enum WarehouseItemCode {
   // Helicopters - RUS
 
   KA_50(HELICOPTERS, "Ka-50", List.of("1", "2", "6", "155")),
+  MI_8MT(HELICOPTERS, "Mi-8MT", List.of("1", "2", "6", "151")),
 
   // A/A missiles - US
 
@@ -67,7 +68,7 @@ public enum WarehouseItemCode {
   R_27_R         (AMMO, "P_27P", List.of("4", "4", "7", "13")),
   R_27_T         (AMMO, "P_27T", List.of("4", "4", "7", "15")),
   R_73           (AMMO, "P_73", List.of("4", "4", "7", "18")),
-  R_60           (AMMO, "P_60", List.of("4", "4", "7", "331")),
+  R_60M          (AMMO, "P_60", List.of("4", "4", "7", "10")),
   R_77           (AMMO, "P_77", List.of("4", "4", "7", "19")),
 
   // A/A missiles - Other
@@ -95,10 +96,12 @@ public enum WarehouseItemCode {
   // A/G missiles - RUS
 
   VIKHR          (AMMO, "weapons.missiles.Vikhr_M", List.of("4", "4", "8", "58")),
-  KH_58          (AMMO, "weapons.missiles.Vikhr_M", List.of("4", "4", "8", "46")),
-  KH_25MPU       (AMMO, "weapons.missiles.Vikhr_M", List.of("4", "4", "8", "47")),
-  KH_29L         (AMMO, "weapons.missiles.Vikhr_M", List.of("4", "4", "8", "49")),
-  KH_29T         (AMMO, "weapons.missiles.Vikhr_M", List.of("4", "4", "8", "75")),
+  KH_58          (AMMO, "weapons.missiles.X_58", List.of("4", "4", "8", "46")),
+  KH_25MPU       (AMMO, "weapons.missiles.X_25MP", List.of("4", "4", "8", "47")),
+  KH_25ML        (AMMO, "weapons.missiles.X_25ML", List.of("4", "4", "8", "45")),
+  KH_29L         (AMMO, "weapons.missiles.X_29L", List.of("4", "4", "8", "49")),
+  KH_29T         (AMMO, "weapons.missiles.X_29T", List.of("4", "4", "8", "75")),
+  S_25L          (AMMO, "S_25L", List.of("4", "4", "8", "113")),
 
   // Bombs - US
 
@@ -134,6 +137,14 @@ public enum WarehouseItemCode {
   S_13           (AMMO, "weapons.nurs.C_13", List.of("4", "7", "33", "33")),
   S_25           (AMMO, "weapons.nurs.C_25", List.of("4", "7", "33", "35")),
 
+  // Clusters
+  BLG66          (AMMO, "weapons.bombs.BLG66_BELOUGA", List.of("4", "5", "38", "313")),
+  CBU_87         (AMMO, "weapons.bombs.CBU_87", List.of("4", "5", "38", "77")),
+  CBU_97         (AMMO, "weapons.bombs.CBU_97", List.of("4", "5", "38", "35")),
+  CBU_103        (AMMO, "weapons.bombs.CBU_103", List.of("4", "5", "38", "88")),
+  CBU_105        (AMMO, "weapons.bombs.CBU_105", List.of("4", "5", "38", "87")),
+  CBU_99         (AMMO, "weapons.bombs.CBU_99", List.of("4", "5", "38", "290")),
+  MK_20          (AMMO, "weapons.bombs.ROCKEYE", List.of("4", "5", "38", "45")),
   ;
 
   private final WarehouseItemCategory category;

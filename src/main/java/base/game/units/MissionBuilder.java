@@ -534,8 +534,8 @@ builtPlanes+
 "                                            [\"type\"] = \"TakeOffParking\",\n" +
 "                                            [\"ETA\"] = 0,\n" +
 "                                            [\"ETA_locked\"] = true,\n" +
-"                                            [\"y\"] = "+x+",\n" +
-"                                            [\"x\"] = "+y+",\n" +
+"                                            [\"y\"] = "+y+",\n" +
+"                                            [\"x\"] = "+x+",\n" +
 "                                            [\"name\"] = \"0\",\n" +
 "                                            [\"formation_template\"] = \"\",\n" +
 "                                            [\"airdromeId\"] = "+airdromeId+",\n" +
@@ -557,6 +557,7 @@ builtPlanes+
 "                                        [\"speed\"] = 138.88888888889,\n" +
 "                                        [\"AddPropAircraft\"] = \n" +
 "                                        {\n" +
+makeAircraftProps(type)+
 "                                        }, -- end of [\"AddPropAircraft\"]\n" +
 "                                        [\"type\"] = \""+type+"\",\n" +
 "                                        [\"Radio\"] = \n" +
@@ -682,6 +683,10 @@ builtPlanes+
 "                                            [\"name\"] = \"Enfield11\",\n" +
 "                                        }, -- end of [\"callsign\"]\n" +
 "                                        [\"onboard_num\"] = \"050\",\n" +
+"                                        [\"AddPropAircraft\"] = \n" +
+"                                        {\n" +
+makeAircraftProps(type)+
+"                                        }, -- end of [\"AddPropAircraft\"]\n" +
 "                                    }, -- end of [1]\n" +
 "                                }, -- end of [\"units\"]\n" +
 "                                [\"y\"] = "+y+",\n" +
@@ -776,6 +781,10 @@ builtPlanes+
 "                                            [\"name\"] = \"Enfield11\",\n" +
 "                                        }, -- end of [\"callsign\"]\n" +
 "                                        [\"onboard_num\"] = \"050\",\n" +
+"                                        [\"AddPropAircraft\"] = \n" +
+"                                        {\n" +
+makeAircraftProps(type)+
+"                                        }, -- end of [\"AddPropAircraft\"]\n" +
 "                                    }, -- end of [1]\n" +
 "                                }, -- end of [\"units\"]\n" +
 "                                [\"y\"] = "+y+",\n" +
@@ -1112,5 +1121,13 @@ carrierStr+
 "                                [\"x\"] = "+carrier.dcsLocation().longitude()+",\n" +
 "                                [\"name\"] = \""+carrier.airbaseName()+"\",\n" +
 "                                [\"start_time\"] = 0,";
+  }
+
+  private String makeAircraftProps(String type) {
+    if (WarehouseItemCode.F_14_B.name().equals(type))
+    return
+"                                                [\"INSAlignmentStored\"] = true,";
+    else
+      return "";
   }
 }
