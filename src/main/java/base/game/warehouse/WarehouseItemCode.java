@@ -24,6 +24,8 @@ public enum WarehouseItemCode {
   F_16_C(PLANES, "F-16C_50", List.of("1", "1", "1", "269")),
   F_A_18_C(PLANES, "FA-18C_hornet", List.of("1", "1", "1", "273")),
   AV_8B_NA(PLANES, "AV8BNA", List.of("1", "1", "1", "216")),
+  A_10C(PLANES, "A-10C", List.of("1", "1", "6", "58")),
+  A_10C_2(PLANES, "A-10C_2", List.of("1", "1", "6", "263")),
 
   // Planes - RUS
 
@@ -88,10 +90,13 @@ public enum WarehouseItemCode {
   AGM_65_G       (AMMO, "weapons.missiles.AGM_65G", List.of("4", "4", "8", "139")),
   AGM_65_H       (AMMO, "weapons.missiles.AGM_65H", List.of("4", "4", "8", "138")),
   AGM_65_K       (AMMO, "weapons.missiles.AGM_65K", List.of("4", "4", "8", "61")),
+  AGM_65_L       (AMMO, "weapons.missiles.AGM_65L", List.of("4", "4", "8", "273")),
 
   AGM_84_D       (AMMO, "weapons.missiles.AGM_84D", List.of("4", "4", "8", "275")),
   AGM_84_E       (AMMO, "weapons.missiles.AGM_84E", List.of("4", "4", "8", "63")),
   AGM_88_C       (AMMO, "weapons.missiles.AGM_88", List.of("4", "4", "8", "65")),
+  MK_151_L       (AMMO, "weapons.missiles.AGR_20A", List.of("4", "4", "8", "293")),
+  MK_282_L       (AMMO, "weapons.missiles.AGR_20_M282", List.of("4", "4", "8", "294")),
 
   // A/G missiles - RUS
 
@@ -111,6 +116,7 @@ public enum WarehouseItemCode {
   GBU_31         (AMMO, "weapons.bombs.GBU_31", List.of("4", "5", "36", "85")),
   GBU_31_V3B     (AMMO, "weapons.bombs.GBU_31_V_3B", List.of("4", "5", "36", "92")),
   GBU_38         (AMMO, "weapons.bombs.GBU_38", List.of("4", "5", "36", "86")),
+  GBU_54         (AMMO, "weapons.bombs.GBU_54_V_1B", List.of("4", "5", "36", "281")),
   AGM_62         (AMMO, "weapons.bombs.AGM_62", List.of("4", "5", "36", "47")),
 
   MK_81          (AMMO, "weapons.bombs.Mk_81", List.of("4", "5", "9", "30")),
