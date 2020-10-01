@@ -2,7 +2,7 @@ package base.game.warehouse;
 
 import base.game.Airbases;
 import base.game.CampaignCoalition;
-import static base.game.warehouse.WarehouseItemCategory.AMMO;
+import static base.game.warehouse.WarehouseItemCategory.AMMOS;
 import static base.game.warehouse.WarehouseItemCategory.HELICOPTERS;
 import static base.game.warehouse.WarehouseItemCategory.PLANES;
 import static base.game.warehouse.WarehouseItemCode.AVIATION_GASOLINE_TONS;
@@ -79,7 +79,7 @@ public final class WarehouseBuilder {
       }).collect(joining(""));
     var weapons = "";
     var whWeapons = quantities.entrySet().stream()
-      .filter(e -> e.getKey().category() == AMMO)
+      .filter(e -> AMMOS.contains(e.getKey().category()))
       .collect(toList());
     int ct=0;
     for (var wp: whWeapons) {

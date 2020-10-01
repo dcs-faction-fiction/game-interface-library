@@ -1,6 +1,8 @@
 package base.game.warehouse;
 
-import static base.game.warehouse.WarehouseItemCategory.AMMO;
+import static base.game.warehouse.WarehouseItemCategory.AMMO_AA;
+import static base.game.warehouse.WarehouseItemCategory.AMMO_AG;
+import static base.game.warehouse.WarehouseItemCategory.AMMO_AGU;
 import static base.game.warehouse.WarehouseItemCategory.FUEL;
 import static base.game.warehouse.WarehouseItemCategory.HELICOPTERS;
 import static base.game.warehouse.WarehouseItemCategory.PLANES;
@@ -54,111 +56,111 @@ public enum WarehouseItemCode {
 
   // A/A missiles - US
 
-  AIM_120_B      (AMMO, "weapons.missiles.AIM_120", List.of("4", "4", "7", "24")),
-  AIM_120_C      (AMMO, "weapons.missiles.AIM_120C", List.of("4", "4", "7", "106")),
-  AIM_54_A_MK_47 (AMMO, "AIM_54A_Mk47", List.of("4", "4", "7", "312")),
-  AIM_54_A_MK_60 (AMMO, "AIM_54A_Mk60", List.of("4", "4", "7", "313")),
-  AIM_54_C_MK_47 (AMMO, "AIM_54C_Mk47", List.of("4", "4", "7", "314")),
-  AIM_7_F        (AMMO, "AIM-7F", List.of("4", "4", "7", "269")),
-  AIM_7_M        (AMMO, "weapons.missiles.AIM_7", List.of("4", "4", "7", "21")),
-  AIM_7_MH       (AMMO, "AIM-7MH", List.of("4", "4", "7", "270")),
-  AIM_9_L        (AMMO, "AIM-9L", List.of("4", "4", "7", "267")),
-  AIM_9_M        (AMMO, "AIM_9", List.of("4", "4", "7", "22")),
-  AIM_9_P5       (AMMO, "AIM-9P5", List.of("4", "4", "7", "266")),
-  AIM_9_X        (AMMO, "AIM_9X", List.of("4", "4", "7", "136")),
+  AIM_120_B      (AMMO_AA, "weapons.missiles.AIM_120", List.of("4", "4", "7", "24")),
+  AIM_120_C      (AMMO_AA, "weapons.missiles.AIM_120C", List.of("4", "4", "7", "106")),
+  AIM_54_A_MK_47 (AMMO_AA, "AIM_54A_Mk47", List.of("4", "4", "7", "312")),
+  AIM_54_A_MK_60 (AMMO_AA, "AIM_54A_Mk60", List.of("4", "4", "7", "313")),
+  AIM_54_C_MK_47 (AMMO_AA, "AIM_54C_Mk47", List.of("4", "4", "7", "314")),
+  AIM_7_F        (AMMO_AA, "AIM-7F", List.of("4", "4", "7", "269")),
+  AIM_7_M        (AMMO_AA, "weapons.missiles.AIM_7", List.of("4", "4", "7", "21")),
+  AIM_7_MH       (AMMO_AA, "AIM-7MH", List.of("4", "4", "7", "270")),
+  AIM_9_L        (AMMO_AA, "AIM-9L", List.of("4", "4", "7", "267")),
+  AIM_9_M        (AMMO_AA, "AIM_9", List.of("4", "4", "7", "22")),
+  AIM_9_P5       (AMMO_AA, "AIM-9P5", List.of("4", "4", "7", "266")),
+  AIM_9_X        (AMMO_AA, "AIM_9X", List.of("4", "4", "7", "136")),
 
   // A/A missiles - RUS
 
-  R_27_ER        (AMMO, "P_27PE", List.of("4", "4", "7", "14")),
-  R_27_ET        (AMMO, "P_27TE", List.of("4", "4", "7", "16")),
-  R_27_R         (AMMO, "P_27P", List.of("4", "4", "7", "13")),
-  R_27_T         (AMMO, "P_27T", List.of("4", "4", "7", "15")),
-  R_73           (AMMO, "P_73", List.of("4", "4", "7", "18")),
-  R_60M          (AMMO, "P_60", List.of("4", "4", "7", "10")),
-  R_77           (AMMO, "P_77", List.of("4", "4", "7", "19")),
+  R_27_ER        (AMMO_AA, "P_27PE", List.of("4", "4", "7", "14")),
+  R_27_ET        (AMMO_AA, "P_27TE", List.of("4", "4", "7", "16")),
+  R_27_R         (AMMO_AA, "P_27P", List.of("4", "4", "7", "13")),
+  R_27_T         (AMMO_AA, "P_27T", List.of("4", "4", "7", "15")),
+  R_73           (AMMO_AA, "P_73", List.of("4", "4", "7", "18")),
+  R_60M          (AMMO_AA, "P_60", List.of("4", "4", "7", "10")),
+  R_77           (AMMO_AA, "P_77", List.of("4", "4", "7", "19")),
 
   // A/A missiles - Other
 
-  MATRA_MAGIC_2  (AMMO, "P_77", List.of("4", "4", "7", "320")),
-  MATRA_S_530_D  (AMMO, "P_77", List.of("4", "4", "7", "322")),
+  MATRA_MAGIC_2  (AMMO_AA, "P_77", List.of("4", "4", "7", "320")),
+  MATRA_S_530_D  (AMMO_AA, "P_77", List.of("4", "4", "7", "322")),
 
   // A/G missiles - US
 
-  AGM_122        (AMMO, "weapons.missiles.AGM_122", List.of("4", "4", "8", "68")),
-  AGM_154_A      (AMMO, "weapons.missiles.AGM_154A", List.of("4", "4", "8", "277")),
-  AGM_154_C      (AMMO, "weapons.missiles.AGM_154", List.of("4", "4", "8", "132")),
+  AGM_122        (AMMO_AG, "weapons.missiles.AGM_122", List.of("4", "4", "8", "68")),
+  AGM_154_A      (AMMO_AG, "weapons.missiles.AGM_154A", List.of("4", "4", "8", "277")),
+  AGM_154_C      (AMMO_AG, "weapons.missiles.AGM_154", List.of("4", "4", "8", "132")),
 
-  AGM_65_D       (AMMO, "weapons.missiles.AGM_65D", List.of("4", "4", "8", "77")),
-  AGM_65_E       (AMMO, "weapons.missiles.AGM_65E", List.of("4", "4", "8", "70")),
-  AGM_65_F       (AMMO, "weapons.missiles.AGM_65F", List.of("4", "4", "8", "272")),
-  AGM_65_G       (AMMO, "weapons.missiles.AGM_65G", List.of("4", "4", "8", "139")),
-  AGM_65_H       (AMMO, "weapons.missiles.AGM_65H", List.of("4", "4", "8", "138")),
-  AGM_65_K       (AMMO, "weapons.missiles.AGM_65K", List.of("4", "4", "8", "61")),
-  AGM_65_L       (AMMO, "weapons.missiles.AGM_65L", List.of("4", "4", "8", "273")),
+  AGM_65_D       (AMMO_AG, "weapons.missiles.AGM_65D", List.of("4", "4", "8", "77")),
+  AGM_65_E       (AMMO_AG, "weapons.missiles.AGM_65E", List.of("4", "4", "8", "70")),
+  AGM_65_F       (AMMO_AG, "weapons.missiles.AGM_65F", List.of("4", "4", "8", "272")),
+  AGM_65_G       (AMMO_AG, "weapons.missiles.AGM_65G", List.of("4", "4", "8", "139")),
+  AGM_65_H       (AMMO_AG, "weapons.missiles.AGM_65H", List.of("4", "4", "8", "138")),
+  AGM_65_K       (AMMO_AG, "weapons.missiles.AGM_65K", List.of("4", "4", "8", "61")),
+  AGM_65_L       (AMMO_AG, "weapons.missiles.AGM_65L", List.of("4", "4", "8", "273")),
 
-  AGM_84_D       (AMMO, "weapons.missiles.AGM_84D", List.of("4", "4", "8", "275")),
-  AGM_84_E       (AMMO, "weapons.missiles.AGM_84E", List.of("4", "4", "8", "63")),
-  AGM_88_C       (AMMO, "weapons.missiles.AGM_88", List.of("4", "4", "8", "65")),
-  MK_151_L       (AMMO, "weapons.missiles.AGR_20A", List.of("4", "4", "8", "293")),
-  MK_282_L       (AMMO, "weapons.missiles.AGR_20_M282", List.of("4", "4", "8", "294")),
+  AGM_84_D       (AMMO_AG, "weapons.missiles.AGM_84D", List.of("4", "4", "8", "275")),
+  AGM_84_E       (AMMO_AG, "weapons.missiles.AGM_84E", List.of("4", "4", "8", "63")),
+  AGM_88_C       (AMMO_AG, "weapons.missiles.AGM_88", List.of("4", "4", "8", "65")),
+  MK_151_L       (AMMO_AG, "weapons.missiles.AGR_20A", List.of("4", "4", "8", "293")),
+  MK_282_L       (AMMO_AG, "weapons.missiles.AGR_20_M282", List.of("4", "4", "8", "294")),
 
   // A/G missiles - RUS
 
-  VIKHR          (AMMO, "weapons.missiles.Vikhr_M", List.of("4", "4", "8", "58")),
-  KH_58          (AMMO, "weapons.missiles.X_58", List.of("4", "4", "8", "46")),
-  KH_25MPU       (AMMO, "weapons.missiles.X_25MP", List.of("4", "4", "8", "47")),
-  KH_25ML        (AMMO, "weapons.missiles.X_25ML", List.of("4", "4", "8", "45")),
-  KH_29L         (AMMO, "weapons.missiles.X_29L", List.of("4", "4", "8", "49")),
-  KH_29T         (AMMO, "weapons.missiles.X_29T", List.of("4", "4", "8", "75")),
-  S_25L          (AMMO, "S_25L", List.of("4", "4", "8", "113")),
+  VIKHR          (AMMO_AG, "weapons.missiles.Vikhr_M", List.of("4", "4", "8", "58")),
+  KH_58          (AMMO_AG, "weapons.missiles.X_58", List.of("4", "4", "8", "46")),
+  KH_25MPU       (AMMO_AG, "weapons.missiles.X_25MP", List.of("4", "4", "8", "47")),
+  KH_25ML        (AMMO_AG, "weapons.missiles.X_25ML", List.of("4", "4", "8", "45")),
+  KH_29L         (AMMO_AG, "weapons.missiles.X_29L", List.of("4", "4", "8", "49")),
+  KH_29T         (AMMO_AG, "weapons.missiles.X_29T", List.of("4", "4", "8", "75")),
+  S_25L          (AMMO_AG, "S_25L", List.of("4", "4", "8", "113")),
 
   // A/G missiles - other
 
-  HOT3           (AMMO, "HOT3", List.of("4", "4", "8", "345")),
+  HOT3           (AMMO_AG, "HOT3", List.of("4", "4", "8", "345")),
 
   // Bombs - US
 
-  GBU_10         (AMMO, "weapons.bombs.GBU_10", List.of("4", "5", "36", "36")),
-  GBU_12         (AMMO, "weapons.bombs.GBU_12", List.of("4", "5", "36", "38")),
-  GBU_16         (AMMO, "weapons.bombs.GBU_16", List.of("4", "5", "36", "39")),
-  GBU_31         (AMMO, "weapons.bombs.GBU_31", List.of("4", "5", "36", "85")),
-  GBU_31_V3B     (AMMO, "weapons.bombs.GBU_31_V_3B", List.of("4", "5", "36", "92")),
-  GBU_38         (AMMO, "weapons.bombs.GBU_38", List.of("4", "5", "36", "86")),
-  GBU_54         (AMMO, "weapons.bombs.GBU_54_V_1B", List.of("4", "5", "36", "281")),
-  AGM_62         (AMMO, "weapons.bombs.AGM_62", List.of("4", "5", "36", "47")),
+  GBU_10         (AMMO_AG, "weapons.bombs.GBU_10", List.of("4", "5", "36", "36")),
+  GBU_12         (AMMO_AG, "weapons.bombs.GBU_12", List.of("4", "5", "36", "38")),
+  GBU_16         (AMMO_AG, "weapons.bombs.GBU_16", List.of("4", "5", "36", "39")),
+  GBU_31         (AMMO_AG, "weapons.bombs.GBU_31", List.of("4", "5", "36", "85")),
+  GBU_31_V3B     (AMMO_AG, "weapons.bombs.GBU_31_V_3B", List.of("4", "5", "36", "92")),
+  GBU_38         (AMMO_AG, "weapons.bombs.GBU_38", List.of("4", "5", "36", "86")),
+  GBU_54         (AMMO_AG, "weapons.bombs.GBU_54_V_1B", List.of("4", "5", "36", "281")),
+  AGM_62         (AMMO_AG, "weapons.bombs.AGM_62", List.of("4", "5", "36", "47")),
 
-  MK_81          (AMMO, "weapons.bombs.Mk_81", List.of("4", "5", "9", "30")),
-  MK_82          (AMMO, "weapons.bombs.Mk_82", List.of("4", "5", "9", "31")),
-  MK_83          (AMMO, "weapons.bombs.Mk_83", List.of("4", "5", "9", "32")),
-  MK_84          (AMMO, "weapons.bombs.Mk_84", List.of("4", "5", "9", "33")),
-  MK_82X         (AMMO, "weapons.bombs.MK_82SNAKEYE", List.of("4", "5", "9", "79")),
-  MK_82Y         (AMMO, "weapons.bombs.Mk_82Y", List.of("4", "5", "9", "298")),
+  MK_81          (AMMO_AGU, "weapons.bombs.Mk_81", List.of("4", "5", "9", "30")),
+  MK_82          (AMMO_AGU, "weapons.bombs.Mk_82", List.of("4", "5", "9", "31")),
+  MK_83          (AMMO_AGU, "weapons.bombs.Mk_83", List.of("4", "5", "9", "32")),
+  MK_84          (AMMO_AGU, "weapons.bombs.Mk_84", List.of("4", "5", "9", "33")),
+  MK_82X         (AMMO_AGU, "weapons.bombs.MK_82SNAKEYE", List.of("4", "5", "9", "79")),
+  MK_82Y         (AMMO_AGU, "weapons.bombs.Mk_82Y", List.of("4", "5", "9", "298")),
 
   // Rockets - US
 
-  ZUNI           (AMMO, "weapons.nurs.Zuni_127", List.of("4", "7", "33", "37")),
-  M151           (AMMO, "weapons.nurs.HYDRA_70_M151", List.of("4", "7", "33", "147")),
-  M5_HE          (AMMO, "weapons.nurs.HYDRA_70_MK5", List.of("4", "7", "33", "145")),
+  ZUNI           (AMMO_AGU, "weapons.nurs.Zuni_127", List.of("4", "7", "33", "37")),
+  M151           (AMMO_AGU, "weapons.nurs.HYDRA_70_M151", List.of("4", "7", "33", "147")),
+  M5_HE          (AMMO_AGU, "weapons.nurs.HYDRA_70_MK5", List.of("4", "7", "33", "145")),
 
   // Bombs - RUS
 
-  FAB_250        (AMMO, "weapons.bombs.FAB_250", List.of("4", "5", "9", "6")),
-  FAB_500        (AMMO, "weapons.bombs.FAB_500", List.of("4", "5", "9", "7")),
+  FAB_250        (AMMO_AGU, "weapons.bombs.FAB_250", List.of("4", "5", "9", "6")),
+  FAB_500        (AMMO_AGU, "weapons.bombs.FAB_500", List.of("4", "5", "9", "7")),
 
   // Rockets - RUS
 
-  S_8            (AMMO, "weapons.nurs.C_8",  List.of("4", "7", "33", "32")),
-  S_13           (AMMO, "weapons.nurs.C_13", List.of("4", "7", "33", "33")),
-  S_25           (AMMO, "weapons.nurs.C_25", List.of("4", "7", "33", "35")),
+  S_8            (AMMO_AGU, "weapons.nurs.C_8",  List.of("4", "7", "33", "32")),
+  S_13           (AMMO_AGU, "weapons.nurs.C_13", List.of("4", "7", "33", "33")),
+  S_25           (AMMO_AGU, "weapons.nurs.C_25", List.of("4", "7", "33", "35")),
 
   // Clusters
-  BLG66          (AMMO, "weapons.bombs.BLG66_BELOUGA", List.of("4", "5", "38", "313")),
-  CBU_87         (AMMO, "weapons.bombs.CBU_87", List.of("4", "5", "38", "77")),
-  CBU_97         (AMMO, "weapons.bombs.CBU_97", List.of("4", "5", "38", "35")),
-  CBU_103        (AMMO, "weapons.bombs.CBU_103", List.of("4", "5", "38", "88")),
-  CBU_105        (AMMO, "weapons.bombs.CBU_105", List.of("4", "5", "38", "87")),
-  CBU_99         (AMMO, "weapons.bombs.CBU_99", List.of("4", "5", "38", "290")),
-  MK_20          (AMMO, "weapons.bombs.ROCKEYE", List.of("4", "5", "38", "45")),
+  BLG66          (AMMO_AGU, "weapons.bombs.BLG66_BELOUGA", List.of("4", "5", "38", "313")),
+  CBU_87         (AMMO_AGU, "weapons.bombs.CBU_87", List.of("4", "5", "38", "77")),
+  CBU_97         (AMMO_AGU, "weapons.bombs.CBU_97", List.of("4", "5", "38", "35")),
+  CBU_103        (AMMO_AG, "weapons.bombs.CBU_103", List.of("4", "5", "38", "88")),
+  CBU_105        (AMMO_AG, "weapons.bombs.CBU_105", List.of("4", "5", "38", "87")),
+  CBU_99         (AMMO_AGU, "weapons.bombs.CBU_99", List.of("4", "5", "38", "290")),
+  MK_20          (AMMO_AGU, "weapons.bombs.ROCKEYE", List.of("4", "5", "38", "45")),
   ;
 
   private final WarehouseItemCategory category;
