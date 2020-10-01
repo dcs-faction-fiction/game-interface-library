@@ -40,6 +40,10 @@ public enum Unit {
     this.dcstype = dcstype;
   }
 
+  public UnitType type() {
+    return type;
+  }
+
   public String dcstype() {
     return dcstype;
   }
