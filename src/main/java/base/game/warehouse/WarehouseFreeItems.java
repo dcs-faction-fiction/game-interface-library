@@ -144,6 +144,10 @@ public enum WarehouseFreeItems {
     List.of("4", "15", "48", "547"),
     List.of("4", "15", "48", "94")
   )),
+  EXTRAS(100, List.of(
+    List.of("4", "15", "47", "640"),
+    List.of("4", "15", "47", "641")
+  ));
   ;
 
   private final int amount;

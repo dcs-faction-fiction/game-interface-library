@@ -33,6 +33,7 @@ public enum WarehouseItemCode {
   J_11A(PLANES, "J-11A", List.of("1", "1", "1", "66")),
   SU_33(PLANES, "Su-33", List.of("1", "1", "1", "4")),
   MIG_29_S(PLANES, "MiG-29S", List.of("1", "1", "1", "50")),
+  SU_25_T(PLANES, "Su-25T", List.of("1", "1", "1", "54")),
 
   // Planes - OTHER
 
@@ -47,6 +48,9 @@ public enum WarehouseItemCode {
 
   KA_50(HELICOPTERS, "Ka-50", List.of("1", "2", "6", "155")),
   MI_8MT(HELICOPTERS, "Mi-8MT", List.of("1", "2", "6", "151")),
+
+  // Helicopters - Other
+  SA342M(HELICOPTERS, "SA342M", List.of("1", "2", "6", "287")),
 
   // A/A missiles - US
 
@@ -107,6 +111,10 @@ public enum WarehouseItemCode {
   KH_29L         (AMMO, "weapons.missiles.X_29L", List.of("4", "4", "8", "49")),
   KH_29T         (AMMO, "weapons.missiles.X_29T", List.of("4", "4", "8", "75")),
   S_25L          (AMMO, "S_25L", List.of("4", "4", "8", "113")),
+
+  // A/G missiles - other
+
+  HOT3           (AMMO, "HOT3", List.of("4", "4", "8", "345")),
 
   // Bombs - US
 
