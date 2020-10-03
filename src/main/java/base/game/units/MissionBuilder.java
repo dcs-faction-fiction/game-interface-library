@@ -351,31 +351,22 @@ return
 "        {\n" +
 "            [1] = \n" +
 "            {\n" +
-"                [\"pressure_spread\"] = 885463.96452844,\n" +
-"                [\"centerZ\"] = 326372.5083395,\n" +
-"                [\"ellipticity\"] = 1.2352837701773,\n" +
-"                [\"rotation\"] = 1.5138912137956,\n" +
-"                [\"pressure_excess\"] = -1216,\n" +
-"                [\"centerX\"] = -130976.84835996,\n" +
+"                [\"pressure_spread\"] = 941533.32375135,\n" +
+"                [\"centerZ\"] = 299313.43999019,\n" +
+"                [\"ellipticity\"] = 1.0470800392607,\n" +
+"                [\"rotation\"] = 0.7880779124333,\n" +
+"                [\"pressure_excess\"] = -1500,\n" +
+"                [\"centerX\"] = -122771.02538112,\n" +
 "            }, -- end of [1]\n" +
 "            [2] = \n" +
 "            {\n" +
-"                [\"pressure_spread\"] = 833927.1114929,\n" +
-"                [\"centerZ\"] = -750368.79265166,\n" +
-"                [\"ellipticity\"] = 1.2352837701773,\n" +
-"                [\"rotation\"] = 1.5138912137956,\n" +
-"                [\"pressure_excess\"] = -1273,\n" +
-"                [\"centerX\"] = 414956.66885519,\n" +
-"            }, -- end of [2]\n" +
-"            [3] = \n" +
-"            {\n" +
-"                [\"pressure_spread\"] = 846429.0764874,\n" +
-"                [\"centerZ\"] = 829548.06612259,\n" +
-"                [\"ellipticity\"] = 1.1917620944344,\n" +
-"                [\"rotation\"] = -0.15306894969126,\n" +
-"                [\"pressure_excess\"] = -1487,\n" +
-"                [\"centerX\"] = 274242.80307743,\n" +
-"            }, -- end of [3]\n" +
+"                [\"pressure_spread\"] = 1088787.8352334,\n" +
+"                [\"centerZ\"] = -358796.94062436,\n" +
+"                [\"ellipticity\"] = 1.0470800392607,\n" +
+"                [\"rotation\"] = 0.7880779124333,\n" +
+"                [\"pressure_excess\"] = 2000,\n" +
+"                [\"centerX\"] = 464421.45805866,\n" +
+"            }, -- end of [2]" +
 "        }, -- end of [\"cyclones\"],\n" +
 "        [\"dust_density\"] = 0,\n" +
 "        [\"enable_dust\"] = false,\n" +
