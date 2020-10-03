@@ -390,7 +390,8 @@ return
 "        [\"visibility\"] = \n" +
 "        {\n" +
 "            [\"distance\"] = 80000,\n" +
-"        }, -- end of [\"visibility\"]\n";
+"        }, -- end of [\"visibility\"]\n" +
+"    },";
   }
 
   public String addAirbaseAircrafts(Map<Airbases, Map<WarehouseItemCode, BigDecimal>> fullWarehouse) {
