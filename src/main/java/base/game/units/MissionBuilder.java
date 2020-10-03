@@ -328,25 +328,25 @@ return
 "            [\"at8000\"] = \n" +
 "            {\n" +
 "                [\"speed\"] = 0,\n" +
-"                [\"dir\"] = 0,\n" +
+"                [\"dir\"] = 93,\n" +
 "            }, -- end of [\"at8000\"]\n" +
-"            [\"atGround\"] = \n" +
-"            {\n" +
-"                [\"speed\"] = 0,\n" +
-"                [\"dir\"] = 0,\n" +
-"            }, -- end of [\"atGround\"]\n" +
 "            [\"at2000\"] = \n" +
 "            {\n" +
 "                [\"speed\"] = 0,\n" +
-"                [\"dir\"] = 0,\n" +
+"                [\"dir\"] = 314,\n" +
 "            }, -- end of [\"at2000\"]\n" +
+"            [\"atGround\"] = \n" +
+"            {\n" +
+"                [\"speed\"] = 2,\n" +
+"                [\"dir\"] = 144,\n" +
+"            }, -- end of [\"atGround\"]\n" +
 "        }, -- end of [\"wind\"]\n" +
 "        [\"enable_fog\"] = false,\n" +
 "        [\"season\"] = \n" +
 "        {\n" +
-"            [\"temperature\"] = 20,\n" +
+"            [\"temperature\"] = 15,\n" +
 "        }, -- end of [\"season\"]\n" +
-"        [\"qnh\"] = 760,\n" +
+"        [\"qnh\"] = 720,\n" +
 "        [\"cyclones\"] = \n" +
 "        {\n" +
 "            [1] = \n" +
@@ -366,22 +366,22 @@ return
 "                [\"rotation\"] = 0.7880779124333,\n" +
 "                [\"pressure_excess\"] = 2000,\n" +
 "                [\"centerX\"] = 464421.45805866,\n" +
-"            }, -- end of [2]" +
-"        }, -- end of [\"cyclones\"],\n" +
+"            }, -- end of [2]\n" +
+"        }, -- end of [\"cyclones\"]\n" +
+"        [\"name_de\"] = \"Frühling, Klar\",\n" +
 "        [\"dust_density\"] = 0,\n" +
 "        [\"enable_dust\"] = false,\n" +
 "        [\"clouds\"] = \n" +
 "        {\n" +
-"            [\"thickness\"] = 200,\n" +
-"            [\"density\"] = 0,\n" +
-"            [\"base\"] = 300,\n" +
+"            [\"thickness\"] = 2000,\n" +
+"            [\"density\"] = 3,\n" +
+"            [\"base\"] = 2700,\n" +
 "            [\"iprecptns\"] = 0,\n" +
 "        }, -- end of [\"clouds\"]\n" +
 "        [\"atmosphere_type\"] = 1,\n" +
-"        [\"groundTurbulence\"] = 0,\n" +
-"        [\"name_fr\"] = \"Automne, averses\",\n" +
-"        [\"type_weather\"] = 1,\n" +
-"        [\"name\"] = \"Winter, clean sky\",\n" +
+"        [\"groundTurbulence\"] = 18.288,\n" +
+"        [\"type_weather\"] = 0,\n" +
+"        [\"name\"] = \"Spring, Clear sky\",\n" +
 "        [\"fog\"] = \n" +
 "        {\n" +
 "            [\"thickness\"] = 0,\n" +
@@ -390,8 +390,7 @@ return
 "        [\"visibility\"] = \n" +
 "        {\n" +
 "            [\"distance\"] = 80000,\n" +
-"        }, -- end of [\"visibility\"]\n" +
-"    },\n";
+"        }, -- end of [\"visibility\"]\n";
   }
 
   public String addAirbaseAircrafts(Map<Airbases, Map<WarehouseItemCode, BigDecimal>> fullWarehouse) {
