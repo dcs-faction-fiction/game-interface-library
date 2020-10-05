@@ -31,6 +31,8 @@ public enum Airbases {
   FARP_ZESTAFONI(10_001, "FARP_Zestafoni", CAUCASUS, Location.of("42.120816666", "43.018833333", "538"), Location.of("729058.71395477", "-286082.8441803"), true, false),
   FARP_KHASHURI(10_002, "FARP_Khashuri", CAUCASUS, Location.of("41.9852166", "43.6325333", "2254"), Location.of("781760.20100281", "-294944.51849995"), true, false),
   FARP_GORI(10_003, "FARP_Gori", CAUCASUS, Location.of("42.0053333", "44.1032166", "1936"), Location.of("820716.94095054", "-288448.86308349"), true, false),
+  FARP_PROHLADNIY(10_004, "FARP_Prohladniy", CAUCASUS, Location.of("43.761333333", "44.045566666", "689"), Location.of("789811", "-93075"), true, false),
+  FARP_ELHOTOVO(10_005, "FARP_Elhotovo", CAUCASUS, Location.of("43.352266", "44.215433", "1010"), Location.of("809717", "-136686"), true, false),
   // Carriers
   SUPERCARRIER_SNAKE(11_000, "SUPERCARRIER_SNAKE", CAUCASUS, Location.of("42.4886", "40.2774666", "0"), Location.of("498688.2452264", "-268238.84596592"), false, true),
   ;

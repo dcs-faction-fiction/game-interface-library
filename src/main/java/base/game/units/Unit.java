@@ -2,6 +2,7 @@ package base.game.units;
 
 import static base.game.units.UnitType.AAA;
 import static base.game.units.UnitType.AIR;
+import static base.game.units.UnitType.EWR;
 import static base.game.units.UnitType.IFV;
 import static base.game.units.UnitType.MBT;
 import static base.game.units.UnitType.SAM;
@@ -12,6 +13,8 @@ public enum Unit {
   AWACS        (AIR, "M 818"),
   TANKER       (AIR, "M 818"),
 
+  // EWRs
+  EWR_1L13     (EWR, "1L13 EWR"),
   // TANKS
   ABRAMS       (MBT, "M-1 Abrams"),
   T_80         (MBT, "T-80UD"),
