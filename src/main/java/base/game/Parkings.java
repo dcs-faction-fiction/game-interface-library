@@ -916,6 +916,8 @@ addParking(CAUCASUS, "10000", "", "", "-292996.10596527", "845020.76607711");
 addParking(CAUCASUS, "10001", "", "", "-286082.8441803", "729058.71395477");
 addParking(CAUCASUS, "10002", "", "", "-294944.51849995", "781760.20100281");
 addParking(CAUCASUS, "10003", "", "", "-288448.86308349", "820716.94095054");
+addParking(CAUCASUS, "10004", "", "", "-93075", "789811");
+addParking(CAUCASUS, "10005", "", "", "-136686", "809717");
 //</editor-fold>
 //<editor-fold defaultstate="collapsed" desc="parkings caucasus carriers">
 addParking(CAUCASUS, "11000", "1", "1", "-268238.84596592", "498688.2452264");
