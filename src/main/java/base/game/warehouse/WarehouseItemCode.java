@@ -58,9 +58,9 @@ public enum WarehouseItemCode {
 
   AIM_120_B      (AMMO_AA, "weapons.missiles.AIM_120", List.of("4", "4", "7", "24")),
   AIM_120_C      (AMMO_AA, "weapons.missiles.AIM_120C", List.of("4", "4", "7", "106")),
-  AIM_54_A_MK_47 (AMMO_AA, "AIM_54A_Mk47", List.of("4", "4", "7", "312")),
-  AIM_54_A_MK_60 (AMMO_AA, "AIM_54A_Mk60", List.of("4", "4", "7", "313")),
-  AIM_54_C_MK_47 (AMMO_AA, "AIM_54C_Mk47", List.of("4", "4", "7", "314")),
+  AIM_54_A_MK_47 (AMMO_AA, "AIM_54A_Mk47", List.of("4", "4", "7", "320")),
+  AIM_54_A_MK_60 (AMMO_AA, "AIM_54A_Mk60", List.of("4", "4", "7", "321")),
+  AIM_54_C_MK_47 (AMMO_AA, "AIM_54C_Mk47", List.of("4", "4", "7", "322")),
   AIM_7_F        (AMMO_AA, "AIM-7F", List.of("4", "4", "7", "269")),
   AIM_7_M        (AMMO_AA, "weapons.missiles.AIM_7", List.of("4", "4", "7", "21")),
   AIM_7_MH       (AMMO_AA, "AIM-7MH", List.of("4", "4", "7", "270")),
