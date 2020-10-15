@@ -817,6 +817,7 @@ builtUnits+
     dict.add(name);
     return
 "                                [\"visible\"] = false,\n" +
+"                                [\"hiddenOnMFD\"] = true,\n" +
 "                                [\"lateActivation\"] = true,\n" +
 "                                [\"tasks\"] = \n" +
 "                                {\n" +
