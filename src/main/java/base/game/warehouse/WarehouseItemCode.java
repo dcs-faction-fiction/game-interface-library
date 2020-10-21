@@ -41,6 +41,7 @@ public enum WarehouseItemCode {
 
   M_2000_C(PLANES, "M-2000C", List.of("1", "1", "1", "277")),
   JF_17(PLANES, "JF-17", List.of("1", "1", "1", "266")),
+  AJS37(PLANES, "AJS37", List.of("1", "1", "1", "264")),
 
   // Helicopters - US
 
@@ -83,6 +84,8 @@ public enum WarehouseItemCode {
 
   MATRA_MAGIC_2  (AMMO_AA, "P_77", List.of("4", "4", "7", "327")),
   MATRA_S_530_D  (AMMO_AA, "P_77", List.of("4", "4", "7", "328")),
+  RB_24_J        (AMMO_AA, "Rb 24J", List.of("4", "4", "7", "11038")),
+  RB_74          (AMMO_AA, "Rb 74", List.of("4", "4", "7", "11039")),
 
   // A/G missiles - US
 
@@ -117,6 +120,10 @@ public enum WarehouseItemCode {
   // A/G missiles - other
 
   HOT3           (AMMO_AG, "HOT3", List.of("4", "4", "8", "345")),
+  RB_75          (AMMO_AG, "RB75", List.of("4", "4", "8", "11050")),
+  RB_75_T        (AMMO_AG, "RB75T", List.of("4", "4", "8", "11051")),
+  RB_15_F        (AMMO_AG, "Rb 15F", List.of("4", "4", "8", "11041")),
+  RB_04_E        (AMMO_AG, "Rb 04E", List.of("4", "4", "8", "11040")),
 
   // Bombs - US
 
