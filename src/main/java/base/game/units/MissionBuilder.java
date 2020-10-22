@@ -1114,7 +1114,7 @@ carrierStr+
   }
 
   private String makeAircraftRadio(String type) {
-    if (WarehouseItemCode.M_2000_C.name().equals(type))
+    if (WarehouseItemCode.M_2000_C.dcsname().equals(type))
     return
 "                                        [\"Radio\"] = \n" +
 "                                            {\n" +
@@ -1217,7 +1217,7 @@ carrierStr+
 "                                                }, -- end of [\"channels\"]\n" +
 "                                            }, -- end of [2]\n" +
 "                                        }, -- end of [\"Radio\"]\n";
-    else if (WarehouseItemCode.F_A_18_C.name().equals(type))
+    else if (WarehouseItemCode.F_A_18_C.dcsname().equals(type))
     return
 "                                        [\"Radio\"] = \n" +
 "                                        {\n" +
@@ -1320,7 +1320,7 @@ carrierStr+
 "                                                }, -- end of [\"channels\"]\n" +
 "                                            }, -- end of [2]\n" +
 "                                        }, -- end of [\"Radio\"]\n";
-    else if (WarehouseItemCode.F_16_C.name().equals(type))
+    else if (WarehouseItemCode.F_16_C.dcsname().equals(type))
     return
 "                                        [\"Radio\"] = \n" +
 "                                        {\n" +
@@ -1423,7 +1423,7 @@ carrierStr+
 "                                                }, -- end of [\"channels\"]\n" +
 "                                            }, -- end of [2]\n" +
 "                                        }, -- end of [\"Radio\"]\n";
-    else if (WarehouseItemCode.F_14_B.name().equals(type))
+    else if (WarehouseItemCode.F_14_B.dcsname().equals(type))
     return
 "                                        [\"Radio\"] = \n" +
 "                                        {\n" +
@@ -1534,14 +1534,14 @@ carrierStr+
   }
 
   private String makeAircraftProps(String type) {
-    if (WarehouseItemCode.F_14_B.name().equals(type))
+    if (WarehouseItemCode.F_14_B.dcsname().equals(type))
     return
 "                                            [\"INSAlignmentStored\"] = true,\n";
-    else if (WarehouseItemCode.M_2000_C.name().equals(type))
+    else if (WarehouseItemCode.M_2000_C.dcsname().equals(type))
     return
 "                                            [\"ForceINSRules\"] = false,\n" +
 "                                            [\"LaserCode100\"] = 6,\n" +
-"                                            [\"NoDDMSensor\"] = false,\n" +
+"                                            [\"NoDDMSensor\"] = true,\n" +
 "                                            [\"LaserCode1\"] = 8,\n" +
 "                                            [\"WpBullseye\"] = 0,\n" +
 "                                            [\"LoadNVGCase\"] = false,\n" +
